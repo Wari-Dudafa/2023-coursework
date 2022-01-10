@@ -1,0 +1,8 @@
+Ok, so the plan is to do a newspaper delivery service where users are able to:
+
+Sign up
+Login
+Browse newspapers
+Create a bill
+Create a basket
+Checkout
