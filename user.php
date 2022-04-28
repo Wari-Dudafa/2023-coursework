@@ -13,7 +13,7 @@
   <input type="submit" value="Sign up">
 </form>
 
-<form action="-" method="post">
+<form action="loginuser.php" method="post">
   Username:<input type="text" name="Username"><br>
   Password:<input type="password" name="Password"><br>
   <input type="submit" value="Login">
