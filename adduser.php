@@ -16,15 +16,16 @@
 header('Location: user_createdsuccefully.php');
 include_once("connection.php");
 array_map("htmlspecialchars", $_POST);
+$hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT);
 
 $stmt = $conn->prepare("INSERT INTO TblUsers (UserID,Username,Password)VALUES (null,:Username,:Password)");
 
 $stmt->bindParam(':Username', $_POST["Username"]);
-$stmt->bindParam(':Password', $_POST["Password"]);
+$stmt->bindParam(':Password', $hashed_password);
 $stmt->execute();
 $conn=null;
 
 echo $_POST["Username"]."<br>";
-echo $_POST["Password"]."<br>";
+echo $hashed_password."<br>";
 
 ?>

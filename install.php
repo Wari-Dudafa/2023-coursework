@@ -3,6 +3,8 @@ include_once("connection.php");
 
 #Database creation command: CREATE database dtbBranch;
 
+header('Location: user.php');
+
 $stmt = $conn->prepare("DROP TABLE IF EXISTS TblVideos;
 CREATE TABLE TblVideos 
 (VideoID INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -16,7 +18,7 @@ $stmt = $conn->prepare("DROP TABLE IF EXISTS TblUsers;
 CREATE TABLE TblUsers 
 (UserID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 Username VARCHAR(20) NOT NULL,
-Password VARCHAR(20) NOT NULL)");
+Password VARCHAR(500) NOT NULL)");
 $stmt->execute();
 $stmt->closeCursor();
 
