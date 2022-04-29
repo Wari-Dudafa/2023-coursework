@@ -15,6 +15,7 @@
 <?php
 header('Location: user_createdsuccefully.php');
 include_once("connection.php");
+array_map("htmlspecialchars", $_POST);
 
 $stmt = $conn->prepare("INSERT INTO TblUsers (UserID,Username,Password)VALUES (null,:Username,:Password)");
 
