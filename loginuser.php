@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once ("connection.php");
 print_r($_POST)."<br>";
 array_map("htmlspecialchars", $_POST);
@@ -11,6 +12,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
     //if($row['Password'] == $hashed_password){
     if(password_verify($_POST["Password"], $row['Password'])){
+        $_SESSION['CurrentUser']=$row["Username"];
         header('Location: placeholder.php');
         echo "Success<br>";
         echo $_POST["Username"]."<br>";
