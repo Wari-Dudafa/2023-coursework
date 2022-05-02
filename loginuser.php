@@ -1,21 +1,24 @@
 <?php
 include_once ("connection.php");
-print_r($_POST);
+print_r($_POST)."<br>";
 array_map("htmlspecialchars", $_POST);
-$hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT);
+$hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT, ['cost' => 15]);
 
 $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;" );
 $stmt->bindParam(':Username', $_POST['Username']);
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
-    if($row['Password']== $hashed_password){
-        //header('Location: placeholder.php');
+    //if($row['Password'] == $hashed_password){
+    if(password_verify($_POST["Password"], $row['Password'])){
+        header('Location: placeholder.php');
+        echo "Success<br>";
         echo $_POST["Username"]."<br>";
         echo $hashed_password."<br>";
         
     }else{
-        //header('Location: user_relogin.php');
+        header('Location: user_relogin.php');
+        echo "Fail<br>";
         echo $_POST["Username"]."<br>";
         echo $hashed_password."<br>";
     }
