@@ -4,6 +4,6 @@
     <title>Upload</title>
 </head>
 <body>
-    <a href="placeholder.php">Go back</a>
+    <a href="placeholder.php">This page is still in the works, <--</a>
 </body>
 </html>
