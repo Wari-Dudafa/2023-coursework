@@ -38,7 +38,7 @@
         </div>
     </nav>  
 
-    <h1>Placeholder</h1>
+    <h1>Homepage placeholder</h1>
 
     <footer>
         <!--<p></p>-->
