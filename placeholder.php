@@ -29,8 +29,8 @@
                 <a href="logout.php">Logout</a>
             </div>
             <div class="search-container">
-                <form action="placeholder.php" method="post"> <!--Change me to a search results page-->
-                    <input type="text" placeholder="Search..." name="search">
+                <form action="search_results.php" method="post">
+                    <input type="text" placeholder="Search Branch..." name="search">
                     <button type="submit"><i class="fa">&#x1F50E;&#xFE0E;</i></button>
                 </form>
             </div>
