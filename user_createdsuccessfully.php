@@ -26,7 +26,7 @@
         </div>
     </nav>
 
-    <center><h2>Login failed! Please try again</h2></center>
+    <center><h2>Account created successfully! Please login</h2></center>
 
     <div class="row">
         <div class="col-sm-1"></div>

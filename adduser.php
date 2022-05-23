@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-	header('Location: user_createdsuccefully.php');
+	header('Location: user_createdsuccessfully.php');
 	include_once("connection.php");
 	array_map("htmlspecialchars", $_POST);
 	$hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT);
