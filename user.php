@@ -51,7 +51,18 @@
             </div>
         </div>
         <div class="col-sm-1"></div>
+        
   </div>
+
+    <div class="container">
+        <a href="#" data-toggle="popover" title="Login" data-content="ghyjnthrthh">Login/Signup failed?</a>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();   
+        });
+    </script>
 
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
 
