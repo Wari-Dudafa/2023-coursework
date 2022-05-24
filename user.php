@@ -27,6 +27,19 @@
         </div>
     </nav>
 
+    <div class="LoginFeedback">
+        <center><h2><?php
+            session_start();
+            echo "" . $_SESSION["LoginFeedback"];
+            if ($_SESSION['LoginFeedback']="1")
+            {   
+                echo "";
+            }elseif ($_SESSION['LoginFeedback']="2")
+            {
+                echo "Login failed, wrong username";
+            }
+        ?></h2></center>
+    </div>
 
     <div class="row">
         <div class="col-sm-1"></div>

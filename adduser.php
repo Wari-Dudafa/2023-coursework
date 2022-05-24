@@ -6,11 +6,14 @@
 </head>
 <body>
 	<?php
-	header('Location: user_createdsuccessfully.php');
+	session_start();
+	$_SESSION['LoginFeedback']="3";
+	header('Location: user.php');
 	include_once("connection.php");
 	array_map("htmlspecialchars", $_POST);
 	if ($_POST["Username"]==""){
 		echo ("no");
+		$_SESSION['LoginFeedback']="5";
 		header('Location: user.php');
 	}else{
 		$hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT);

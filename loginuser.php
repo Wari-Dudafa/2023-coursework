@@ -8,7 +8,8 @@ $hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT, ['cost' =
 $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;" );
 $stmt->bindParam(':Username', $_POST['Username']);
 $stmt->execute();
-header('Location: user_relogin.php');
+header('Location: user.php');
+$_SESSION['LoginFeedback']="2";
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
     //if($row['Password'] == $hashed_password){
@@ -20,7 +21,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
         echo $hashed_password."<br>";
         
     }else{
-        header('Location: user_relogin.php');
+        header('Location: user.php');
+        $_SESSION['LoginFeedback']="6";
         echo "Fail<br>";
         echo $_POST["Username"]."<br>";
         echo $hashed_password."<br>";
