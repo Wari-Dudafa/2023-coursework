@@ -31,6 +31,10 @@
         <center><h2><?php
             session_start();
             //echo "" . $_SESSION["LoginFeedback"];
+            if (!isset($_SESSION['LoginFeedback']))
+            {   
+                $_SESSION['LoginFeedback']="1";}
+
             if ($_SESSION['LoginFeedback']=="1")
             {   
                 echo "";
@@ -80,7 +84,7 @@
         </div>
         <div class="col-sm-1"></div>
         
-  </div>
+    </div>
 
     <div class="container">
         <a href="#" data-toggle="popover" title="Login" data-content="ghyjnthrthh">Login/Signup failed?</a>
