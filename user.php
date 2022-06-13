@@ -30,13 +30,28 @@
     <div class="LoginFeedback">
         <center><h2><?php
             session_start();
-            echo "" . $_SESSION["LoginFeedback"];
-            if ($_SESSION['LoginFeedback']="1")
+            //echo "" . $_SESSION["LoginFeedback"];
+            if ($_SESSION['LoginFeedback']=="1")
             {   
                 echo "";
-            }elseif ($_SESSION['LoginFeedback']="2")
+            }if ($_SESSION['LoginFeedback']=="2")
             {
                 echo "Login failed, wrong username";
+            }if ($_SESSION['LoginFeedback']=="3")
+            {
+                echo "Account created successfully, please login";
+            }if ($_SESSION['LoginFeedback']=="4")
+            {
+                echo "Username already exists";
+            }if ($_SESSION['LoginFeedback']=="5")
+            {
+                echo "Username is empty";
+            }if ($_SESSION['LoginFeedback']=="6")
+            {
+                echo "Login failed, wrong password";
+            }if ($_SESSION['LoginFeedback']=="7")
+            {
+                echo "Successfully logged out";
             }
         ?></h2></center>
     </div>
