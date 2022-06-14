@@ -87,7 +87,7 @@
     </div>
 
     <div class="container">
-        <a href="#" data-toggle="popover" title="Login" data-content="ghyjnthrthh">Login/Signup failed?</a>
+        <a href="#" data-toggle="popover" title="" data-content="Think hard and try to remember it. Your welcome!">Forgot your password?</a>
     </div>
 
     <script>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,7 @@
 	header('Location: user.php');
 	include_once("connection.php");
 	array_map("htmlspecialchars", $_POST);
+	
 	if ($_POST["Username"]==""){
 		echo ("no");
 		$_SESSION['LoginFeedback']="5";
