@@ -8,35 +8,27 @@
 	<?php
 		session_start();
 		$_SESSION['LoginFeedback']="3";
-		header('Location: user.php');
+		//header('Location: user.php');
 		include_once("connection.php");
 		array_map("htmlspecialchars", $_POST);
 
 		
-		$blankusername = $conn->prepare("select * from TblUsers where Username = :Username;)");
-		$blankusername->bindParam(':Username', $_POST["Username"]);
-		$blankusername->execute();
+		$blankuserame = $conn->prepare("select * from TblUsers where Username = :Username;)");
+		$blankuserame->bindParam(':Username', $_POST["Username"]);
+		$blankuserame->execute();
 		#does query have rows returned
 
-		$count = $blankusername->rowCount();
-		echo($count);
-		while ($row = $blankusername->fetch(PDO::FETCH_ASSOC))
-			{
-			echo($row["Username"]."<br>");
-			}
-		
-		if ($count > 0){
+		if username = any_username_in_database{
 			$_SESSION['LoginFeedback']="4";
-			header('Location: user.php');
+			//header('Location: user.php');
 		}
 		else
 		{
 			if ($_POST["Username"]==""){
 				echo ("no");
 				$_SESSION['LoginFeedback']="5";
-				header('Location: user.php');
+				//header('Location: user.php');
 			}else{
-				$blankusername->closeCursor();
 				$hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT);
 
 				$stmt = $conn->prepare("INSERT INTO TblUsers (UserID,Username,Password)VALUES (null,:Username,:Password)");
@@ -50,10 +42,8 @@
 				echo $hashed_password."<br>";
 			}
 		}
-
 		echo "" . $_SESSION["LoginFeedback"];
 	?>
-
 
 </body>
 </html>
