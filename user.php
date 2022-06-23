@@ -4,6 +4,7 @@
     <title>Login/Sign up</title>
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
     <link rel="stylesheet" href="style.css">
+    <script src="clientvalidation.js"></script>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,7 +68,7 @@
                 <h1><center>Sign up</center></h1>
                 <form action="adduser.php" method="post">
                     <center>Username:<input type="text" name="Username" style="margin-bottom: 10px;"><br>
-                    Password:<input type="password" name="Password" style= "margin-bottom: 10px;"><br>
+                    Password:<input type="password" name="Password" style= "margin-bottom: 10px;"><br>              
                     <input type="submit" value="Sign up"></center>
                 </form>
             </div>
