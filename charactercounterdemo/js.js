@@ -1,6 +1,10 @@
 let textArea = document.getElementById("textbox");
 let characterCounter = document.getElementById("char_count");
-document.getElementById("buttons").innerHTML = "";
+let button = document.getElementById("tadabutton");
+button.style.display = "none";
+
+
+
 
 const countCharacters = () => {
         let numOfEnteredChars = textArea.value.length;
@@ -9,10 +13,12 @@ const countCharacters = () => {
 
       if (counter < 8) {
         characterCounter.style.color = "red";
+        button.style.display = "none";
     } else if (counter > 8) {
         characterCounter.style.color = "green";
-        document.getElementById("buttons").innerHTML = "tada";
+        button.style.display = "block";
     }
+
 };
 
 textArea.addEventListener("input", countCharacters);
