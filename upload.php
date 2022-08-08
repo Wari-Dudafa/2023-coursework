@@ -4,7 +4,7 @@
     <title>Upload</title>
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
     <?php
-        include_once("connection.php")
+        include_once("connection.php");
 
         if(isset($_POST['but_upload'])){
             $maxsize = 104857600; //5MB
@@ -48,11 +48,13 @@
     ?>
 </head>
 <body>
-    <a href="placeholder.php">This page is still in the works, go back</a>
+
     <form method="post" action="" enctype="multipart/form-data">
         <input type='file' name='file'>
         <input type="submit" name="but_upload" value="upload">
 
     </form>
+
+    <a href="watchvideo.php"> <span class="glyphicon glyphicon-upload"></span> WatchVideo</a></li>
 </body>
 </html>
