@@ -9,6 +9,8 @@ $stmt = $conn->prepare("DROP TABLE IF EXISTS TblVideos;
 CREATE TABLE TblVideos 
 (VideoID INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 VideoTitle VARCHAR(50) NOT NULL,
+FileName VARCHAR(50) NOT NULL,
+Location VARCHAR(50) NOT NULL,
 Likes INT(10) NOT NULL,
 Dislikes INT(10) NOT NULL)");
 $stmt->execute();
