@@ -28,15 +28,16 @@
                 }else {
 
                     //UPLOADING BIT
-                    if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
+                    echo "Still working!";
+                    //***if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
                         
                         //insert into database
-                        $query = "INSERT INTO tblVideos(filename, location) VALUES('".$name."','".$target_file."')";
+                        //***$query = "INSERT INTO tblVideos(filename, location) VALUES('".$name."','".$target_file."')";
 
-                        mysqli_query($con,$query);
+                        //***mysqli_query($con,$query);
 
-                        echo "upload done!";
-                    }
+                        //***echo "upload done!";
+                    //***}
                 }
             }else{
                 echo "file error";
