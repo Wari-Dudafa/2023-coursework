@@ -21,9 +21,9 @@
     <nav class="navbar navbar-inverse" style="background-color: #002f63;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="#"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
+                <a href="watchvideo.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
             </div>
-            <form class="navbar-form navbar-left" action="#">
+            <form class="navbar-form navbar-left" action="searchresults.php" method="post">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search branch..." name="search">
                     <div class="input-group-btn">
