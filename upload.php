@@ -4,6 +4,7 @@
     <title>Upload</title>
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
     <?php
+        session_start();
         include_once("connection.php");
 
         if(isset($_POST['but_upload'])){
@@ -29,15 +30,20 @@
 
                     //UPLOADING BIT
                     echo "Still working!";
-                    //***if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
+                    if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
                         
                         //insert into database
                         //***$query = "INSERT INTO tblVideos(filename, location) VALUES('".$name."','".$target_file."')";
-
                         //***mysqli_query($con,$query);
 
-                        //***echo "upload done!";
-                    //***}
+                        $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location)VALUES (null,:videotitle,'".$name."','".$target_file."')");
+                        $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
+                        $stmt->execute();
+                        $conn=null;
+                        echo $_POST["Videotitle"]."<br>";
+
+                        echo "upload done!";
+                    }
                 }
             }else{
                 echo "file error";
@@ -51,8 +57,9 @@
 <body>
 
     <form method="post" action="" enctype="multipart/form-data">
-        <input type='file' name='file'>
-        <input type="submit" name="but_upload" value="upload">
+        <input type="text" name="Videotitle" value="Video title"><br>
+        <input type='file' name='file'><br>
+        <input type="submit" name="but_upload" value="upload"><br>
 
     </form>
 
