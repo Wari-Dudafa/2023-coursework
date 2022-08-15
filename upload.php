@@ -34,7 +34,7 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                <!--<li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>-->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                         <?php
@@ -83,10 +83,7 @@
                                             $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
                                             $stmt->execute();
                                             $conn=null;
-                                            //echo $_POST["Videotitle"]."<br>";
-                    
-                    
-                                            //echo "upload done!";
+                                        
                                         }
                                     }
                                 }else{
@@ -99,7 +96,8 @@
                         ?>
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                        <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>

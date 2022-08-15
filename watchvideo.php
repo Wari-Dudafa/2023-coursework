@@ -34,7 +34,7 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                <!--<li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>-->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                         <?php
@@ -50,7 +50,8 @@
                         ?>
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                        <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -73,11 +74,13 @@
                 $Dislikes = $row['Dislikes'];
 
                 echo "<div class='well' style='background-color: #d3e7ff;'>";
+                echo "<div class='col-sm-2'>";
                 echo "<h3>$VideoTitle</h3>";
                 echo "<p>Uploaded by: --</p>";
-                echo "<button type='button'>Like $Likes </button>";
-                echo "<button type='button'>Dislike $Dislikes </button><br>";
-                echo "<video src='".$location."' controls width='320px' height='200px'>";
+                echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-up'></span> $Likes  </button>";
+                echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-down'></span> $Dislikes  </button><br>";
+                echo "</div>";
+                echo "<video src='".$location."' controls width='320px' height='180px'>";
                 echo "</div>";
                 
 

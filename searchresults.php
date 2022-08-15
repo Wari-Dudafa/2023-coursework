@@ -1,10 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Upload</title>
+    <title>Search results</title>
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
-    <a href="watchvideo.php">This page is still in the works, go back</a>
+<body> 
+
+    <nav class="navbar navbar-inverse" style="background-color: #002f63;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="watchvideo.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
+            </div>
+            <form class="navbar-form navbar-left" action="searchresults.php" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search branch..." name="search">
+                    <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                    </div>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
+                        <?php
+                            session_start();
+                            if (!isset($_SESSION['CurrentUser']))
+                            {   
+                                header("Location:user.php");
+                                echo "Please login to continue<br>";
+                            }else{
+                                //echo "Access granted<br>";
+                                echo "" . $_SESSION["CurrentUser"];
+                            }
+                        ?>
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                        <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">         
+        <h2>Search results for :</h2>                   
+        <?php
+
+            //print_r($_POST)."<br>";
+            $searchvalue = $_POST["search"];
+            print_r($searchvalue)."<br>";
+            include_once("connection.php");
+            $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Videotitle LIKE :search ;" );
+            $stmt->bindParam(':search', $_POST['search']);
+            $stmt->execute();
+            $conn=null;
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $location = $row['Location'];
+                $VideoTitle = $row['VideoTitle'];
+                $Likes = $row['Likes'];
+                $Dislikes = $row['Dislikes'];
+
+                echo "<div class='well' style='background-color: #d3e7ff;'>";
+                echo "<div class='col-sm-2'>";
+                echo "<h3>$VideoTitle</h3>";
+                echo "<p>Uploaded by: --</p>";
+                echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-up'></span> $Likes  </button>";
+                echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-down'></span> $Dislikes  </button><br>";
+                echo "</div>";
+                echo "<video src='".$location."' controls width='320px' height='180px'>";
+                echo "</div>";
+                
+
+            }
+
+        ?>
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
+
 </body>
 </html>
