@@ -8,9 +8,11 @@ header('Location: user.php');
 $stmt = $conn->prepare("DROP TABLE IF EXISTS TblVideos;
 CREATE TABLE TblVideos 
 (VideoID INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-VideoTitle VARCHAR(50) NOT NULL,
-FileName VARCHAR(50) NOT NULL,
-Location VARCHAR(50) NOT NULL,
+VideoTitle VARCHAR(250) NOT NULL,
+FileName VARCHAR(250) NOT NULL,
+Location VARCHAR(250) NOT NULL,
+FileName_thumbnail VARCHAR(250) NOT NULL,
+Location_thumbnail VARCHAR(250) NOT NULL,
 Likes INT(10) NOT NULL,
 Dislikes INT(10) NOT NULL)");
 $stmt->execute();

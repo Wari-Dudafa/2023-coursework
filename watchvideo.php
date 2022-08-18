@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <title>Home</title>
+    <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
-    <link rel="stylesheet" href="style.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -62,29 +62,35 @@
     <div class="container-fluid">                            
         <?php
 
+
             include_once("connection.php");
             $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
             $stmt->execute();
             $conn=null;
 
+
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                 $location = $row['Location'];
+                $location_t = $row['Location_thumbnail'];
                 $VideoTitle = $row['VideoTitle'];
                 $Likes = $row['Likes'];
                 $Dislikes = $row['Dislikes'];
 
-                echo "<div class='well' style='background-color: #d3e7ff;'>";
-                echo "<div class='col-sm-2'>";
-                echo "<h3>$VideoTitle</h3>";
-                echo "<p>Uploaded by: --</p>";
-                echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-up'></span> $Likes  </button>";
-                echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-down'></span> $Dislikes  </button><br>";
-                echo "</div>";
-                echo "<video src='".$location."' controls width='320px' height='180px'>";
-                echo "</div>";
                 
+                echo "<form action='videopage.php' method='post'>";
+                echo "<div class='videoplaybuttons'>";
+                //echo "<div class='col-sm-2'>";
+                echo "<button class='button button1'>";
+                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                echo "<p style='font-size:15px'>Uploaded by: --</p>";
+                //echo "</div>";
+                echo "</button>";
+                echo "</div>";
+                echo '</form>';
 
             }
+        
 
         ?>
     </div>
@@ -92,3 +98,7 @@
 
 </body>
 </html>
+
+<!--echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-up'></span> $Likes  </button>";
+echo "<video src='".$location."' controls width='320px' height='180px'>";
+echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-down'></span> $Dislikes  </button><br>";-->

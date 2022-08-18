@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Search results</title>
+    <title>Home</title>
     <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
 
@@ -59,40 +59,35 @@
     </nav>
 
 
-    <div class="container-fluid">         
-        <h2>Search results for :</h2>                   
+    <div class="container-fluid">                            
         <?php
 
-            //print_r($_POST)."<br>";
-            $searchvalue = $_POST["search"];
-            print_r($searchvalue)."<br>";
             include_once("connection.php");
-            $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Videotitle LIKE :search ;" );
-            $stmt->bindParam(':search', $_POST['search']);
-            $stmt->execute();
-            $conn=null;
+            
 
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $location = $row['Location'];
-                $location_t = $row['Location_thumbnail'];
-                $VideoTitle = $row['VideoTitle'];
-                $Likes = $row['Likes'];
-                $Dislikes = $row['Dislikes'];
+            //$stmt = $conn->prepare("SELECT * FROM tblvideos WHERE ?? = '".$??."'");
+            //$stmt->execute();
+            //$conn=null;
 
-                echo "<form action='videopage.php' method='post'>";
-                echo "<div class='videoplaybuttons'>";
-                //echo "<div class='col-sm-2'>";
-                echo "<button class='button button1'>";
-                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                echo "<p style='font-size:15px'>Uploaded by: --</p>";
-                //echo "</div>";
-                echo "</button>";
-                echo "</div>";
-                echo '</form>';
+            //$row = $stmt->fetch(PDO::FETCH_ASSOC)
+            //$location = $row['Location'];
+            //$location_t = $row['Location_thumbnail'];
+            //$VideoTitle = $row['VideoTitle'];
+            //$Likes = $row['Likes'];
+            //$Dislikes = $row['Dislikes'];
+
                 
+            //echo "<div class='videoplaybuttons'>";
+            ////echo "<div class='col-sm-2'>";
+            //echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+            //echo substr("<h4>$VideoTitle</h4>",0 ,30);
+            //echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-up'></span> $Likes  </button>";
+            //echo "<video src='".$location."' controls width='320px' height='180px'>";
+            //echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-down'></span> $Dislikes  </button><br>";
+            //echo "<p style='font-size:15px'>Uploaded by: --</p>";
+            ////echo "</div>";
+            //echo "</div>";
 
-            }
 
         ?>
     </div>

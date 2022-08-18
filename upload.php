@@ -70,28 +70,55 @@
                                         echo "File too large.";
                                     }else {
                     
-                                        //UPLOADING BIT
-                                        //echo "Still working!";
-                                        if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
-                                            
-                                            //insert into database
-                                            //***$query = "INSERT INTO tblVideos(filename, location) VALUES('".$name."','".$target_file."')";
-                                            //***mysqli_query($con,$query);
-                    
-                    
-                                            $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location)VALUES (null,:videotitle,'".$name."','".$target_file."')");
-                                            $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
-                                            $stmt->execute();
-                                            $conn=null;
+                                            //Thumnbnail upload
+                                            if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
+        
+                        
+
                                         
+                                                    $name_t = $_FILES['thumb']['name'];
+                                                    $traget_dir_t = "tblvideos/";
+                                                    $target_file_t = $traget_dir_t . $_FILES["thumb"]["name"];
+                                        
+                                                    //file type
+                                                    $videoFileType_t = strtolower(pathinfo($target_file_t,PATHINFO_EXTENSION));
+                                        
+                                                    //acceptable extensions
+                                                    $extensions_arr_t = array("png", "jpeg", "jpg");
+                                        
+                                                    //Checks the video extension
+                                                    if (in_array($videoFileType_t, $extensions_arr_t)){
+                                        
+                                                        //now we compare file size
+                                                        if (($_FILES['thumb']['size'] >= $maxsize) || ($_FILES["thumb"]['size'] == 0)){
+                                                            echo "File too large.";
+                                                        }else {
+                                        
+                                                            //UPLOADING BIT
+                                                            echo "Still working!";
+                                                            if (move_uploaded_file($_FILES['thumb']['tmp_name'],$target_file_t)) {
+                                                                
+                                        
+                                        
+                                                                $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location,FileName_thumbnail,Location_thumbnail)VALUES (null,:videotitle,'".$name."','".$target_file."','".$name_t."','".$target_file_t."')");
+                                                                $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
+                                                                $stmt->execute();
+                                                                $conn=null;
+                                                                header('Location: watchvideo.php');
+                                                        
+                                                        }
+                                        
+                                            }
                                         }
                                     }
-                                }else{
-                                    echo "file error";
                                 }
+                                //else{
+                                    echo "file error";
+                                    header('Location: watchvideo.php');
+                                }}//}
                     
                     
-                            }
+                            
                     
                         ?>
                     <span class="caret"></span></a>
@@ -110,9 +137,10 @@
             <div class="well" style="background-color: #d3e7ff;">
                 <h1><center>Upload</center></h1>
                     <form method="post" action="" enctype="multipart/form-data">
-                        Video title: <input type="text" name="Videotitle" value=""><br>
-                        <input type='file' name='file'><br>
-                        <input type="submit" name="but_upload" value="upload"><br>
+                        <p>Video:</p><input type='file' name='file'><br>
+                        <p>VideoTitle: </p><input type="text" name="Videotitle" value=""><br>
+                        <p>Thumbnail:</p><input type='file' name='thumb'><br>
+                        <center><input type="submit" name="but_upload" value="upload"></center><br>
                     </form>
             </div>
         </div>
