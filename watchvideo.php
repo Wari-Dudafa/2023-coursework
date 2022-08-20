@@ -79,12 +79,12 @@
                 
                 echo "<form action='videopage.php' method='post'>";
                 echo "<div class='videoplaybuttons'>";
-                //echo "<div class='col-sm-2'>";
+                echo "<div class='col-sm-3'>";
                 echo "<button class='button button1'>";
                 echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
                 echo substr("<h4>$VideoTitle</h4>",0 ,30);
                 echo "<p style='font-size:15px'>Uploaded by: --</p>";
-                //echo "</div>";
+                echo "</div>";
                 echo "</button>";
                 echo "</div>";
                 echo '</form>';
