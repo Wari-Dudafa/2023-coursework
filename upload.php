@@ -98,13 +98,12 @@
                                                             echo "Still working!";
                                                             if (move_uploaded_file($_FILES['thumb']['tmp_name'],$target_file_t)) {
                                                                 
-                                        
-                                        
                                                                 $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location,FileName_thumbnail,Location_thumbnail)VALUES (null,:videotitle,'".$name."','".$target_file."','".$name_t."','".$target_file_t."')");
                                                                 $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
                                                                 $stmt->execute();
                                                                 $conn=null;
                                                                 header('Location: watchvideo.php');
+                                                            
                                                         
                                                         }
                                         
