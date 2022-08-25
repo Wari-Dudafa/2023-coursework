@@ -48,6 +48,7 @@
                                 echo "" . $_SESSION["CurrentUser"];
                             }
                             include_once("connection.php");
+                        
 
                             if(isset($_POST['but_upload'])){
                                 $maxsize = 104857600; //5MB
@@ -72,10 +73,7 @@
                     
                                             //Thumnbnail upload
                                             if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
-        
-                        
 
-                                        
                                                     $name_t = $_FILES['thumb']['name'];
                                                     $traget_dir_t = "tblvideos/";
                                                     $target_file_t = $traget_dir_t . $_FILES["thumb"]["name"];
@@ -95,15 +93,28 @@
                                                         }else {
                                         
                                                             //UPLOADING BIT
-                                                            echo "Still working!";
+                                                            //echo "Still working!";
                                                             if (move_uploaded_file($_FILES['thumb']['tmp_name'],$target_file_t)) {
                                                                 
                                                                 $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location,FileName_thumbnail,Location_thumbnail)VALUES (null,:videotitle,'".$name."','".$target_file."','".$name_t."','".$target_file_t."')");
                                                                 $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
                                                                 $stmt->execute();
                                                                 $conn=null;
-                                                                header('Location: watchvideo.php');
-                                                            
+
+                                                                //<uploaded by segment
+                                                                    //get user id
+                                                                    unset($stmt);
+                                                                    $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;");
+                                                                    $stmt->bindParam(':Username', $_SESSION['CurrentUser']);
+                                                                    $stmt->execute();
+                                                                    $userid = $stmt -> fetch();
+                                                                    echo "This user's id is: '".$userid."'.'>";
+                                                                    $conn=null;
+                                                                    
+                                                                    //get video id
+
+                                                                //>
+                                                                //header('Location: watchvideo.php');***                                                        
                                                         
                                                         }
                                         
@@ -113,8 +124,8 @@
                                 }
                                 //else{
                                     echo "file error";
-                                    header('Location: watchvideo.php');
-                                }}//}
+                                    //header('Location: watchvideo.php');***
+                                }}
                     
                     
                             
