@@ -103,7 +103,6 @@
 
                                                                 //<uploaded by segment
                                                                     //get user id
-                                                                    include_once ("connection.php");
                                                                     unset($stmt);
                                                                     $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;");
                                                                     $stmt->bindParam(':Username', $_SESSION['CurrentUser']);
@@ -111,7 +110,7 @@
                                                                     $userid = $stmt -> fetch();
                                                                     echo "This user's id is: '".$userid."'.'>";
                                                                     $conn=null;
-
+                                                                    
                                                                     //get video id
 
                                                                 //>
