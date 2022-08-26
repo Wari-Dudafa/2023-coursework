@@ -80,33 +80,31 @@
                 $Likes = $row['Likes'];
                 $Dislikes = $row['Dislikes'];
 
-                while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
 
-                    $userid = $row1['UserID'];
+                $userid = $row1['UserID'];
 
-                    $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
-                    $stmt2->bindParam(':Userid', $userid);
-                    $stmt2->execute();
-                    $conn=null;
+                $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                $stmt2->bindParam(':Userid', $userid);
+                $stmt2->execute();
 
-                    while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-                        $uploader = $row2['Username'];
+                $uploader = $row2['Username'];
 
-                        echo "<form action='videopage.php' method='post'>";
-                        echo "<div class='videoplaybuttons'>";
-                        echo "<div class='col-sm-3'>";
-                        echo "<button class='button button1'>";
-                        echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                        echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                        echo "<p style='font-size:15px'>$uploader</p>";
-                        echo "</div>";
-                        echo "</button>";
-                        echo "</div>";
-                        echo '</form>';
-                    }
-                }
-            }    
+                echo "<form action='videopage.php' method='post'>";
+                echo "<div class='videoplaybuttons'>";
+                echo "<div class='col-sm-3'>";
+                echo "<button class='button button1'>";
+                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                echo "<p style='font-size:15px'>$uploader</p>";
+                echo "</div>";
+                echo "</button>";
+                echo "</div>";
+                echo '</form>';
+            }
+            $conn=null;    
         ?>
     </div>
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">

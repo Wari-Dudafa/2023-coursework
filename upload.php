@@ -114,16 +114,17 @@
                                                                     //>
                                                                     
                                                                     //<get video id
-                                                                        $stmt2 = $conn->prepare("SELECT VideoID, UserID FROM tblusersvideos WHERE UserID =:userid AND (SELECT MAX(VideoID) FROM tblusersvideos);;");
-                                                                        $stmt2->bindParam(':userid', $userid);
-                                                                        $stmt2->execute();
+                                                                        //$stmt2 = $conn->prepare("SELECT VideoID, UserID FROM tblusersvideos WHERE UserID =:userid AND (SELECT MAX(VideoID) FROM tblusersvideos);;");
+                                                                        //$stmt2->bindParam(':userid', $userid);
+                                                                        //$stmt2->execute();
 
-                                                                        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
-                                                                        {
-                                                                        
-                                                                            $videoidmax=$row["VideoID"];
-                                                                            echo " VideoID: '".$videoidmax."'";
-                                                                        }
+                                                                        //while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
+                                                                        //{
+                                                                            //$videoidmax=$row["VideoID"];
+                                                                            //echo " VideoIDmax: '".$videoidmax."'";
+
+                                                                            //$videoid = $videoidmax + 1;
+                                                                        //}
                                                                         
                                                                     //>
 
@@ -147,10 +148,6 @@
                                     echo " <br>upload status: file error";
                                     //header('Location: watchvideo.php');***
                                 }}
-                    
-                    
-                            
-                    
                         ?>
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
