@@ -146,7 +146,6 @@
                                 }
                                 else{
                                     echo " <br>upload status: file error";
-                                    //header('Location: watchvideo.php');***
                                 }}
                         ?>
                     <span class="caret"></span></a>
