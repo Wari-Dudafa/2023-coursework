@@ -114,28 +114,35 @@
                                                                     //>
                                                                     
                                                                     //<get video id
-                                                                        $stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE Username =:Username ;");
-                                                                        $stmt2->bindParam(':Username', $_SESSION['CurrentUser']);
-                                                                        $stmt2->execute();
+                                                                        //$stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE Username =:Username ;");
+                                                                        //$stmt2->bindParam(':Username', $_SESSION['CurrentUser']);
+                                                                        //$stmt2->execute();
 
-                                                                        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
-                                                                        {
-                                                                            $videoid=$row["VideoID"];
-                                                                        }
-                                                                        echo " VideoID: '".$videoid."'";
-                                                                        $conn=null;
+                                                                        //while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
+                                                                        //{
+                                                                            //$videoid=$row["VideoID"];
+                                                                        //}
+                                                                        //echo " VideoID: '".$videoid."'";
+                                                                    //>
+
+                                                                    //<put id's into tblusersvideos
+                                                                        //$stmt3 = $conn->prepare("INSERT INTO TblUsersVideos (UserID,VideoID)VALUES (:userid,:videoid)");
+                                                                        //$stmt3->bindParam(':userid', $userid);
+                                                                        //$stmt3->bindParam(':videoid', $videoid);
+                                                                        //$stmt3->execute();
+                                                                        //$conn=null;
                                                                     //>
                                                                 //>
+                                                                echo " <br>upload status: complete";
                                                                 //header('Location: watchvideo.php');***                                                        
-                                                        
+                                                            }
                                                         }
-                                        
                                             }
                                         }
                                     }
                                 }
-                                //else{
-                                    echo "file error";
+                                else{
+                                    echo " <br>upload status: file error";
                                     //header('Location: watchvideo.php');***
                                 }}
                     

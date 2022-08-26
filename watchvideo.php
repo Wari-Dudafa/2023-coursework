@@ -66,29 +66,47 @@
             include_once("connection.php");
             $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
             $stmt->execute();
-            $conn=null;
+            $stmt1 = $conn->prepare("SELECT * FROM tblusersvideos ORDER BY videoid DESC");
+            $stmt1->execute();
+
+            
 
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+
                 $location = $row['Location'];
                 $location_t = $row['Location_thumbnail'];
                 $VideoTitle = $row['VideoTitle'];
                 $Likes = $row['Likes'];
                 $Dislikes = $row['Dislikes'];
 
-                echo "<form action='videopage.php' method='post'>";
-                echo "<div class='videoplaybuttons'>";
-                echo "<div class='col-sm-3'>";
-                echo "<button class='button button1'>";
-                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                echo "<p style='font-size:15px'>Uploader</p>";
-                echo "</div>";
-                echo "</button>";
-                echo "</div>";
-                echo '</form>';
-            }
+                while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
 
+                    $userid = $row1['UserID'];
+
+                    $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                    $stmt2->bindParam(':Userid', $userid);
+                    $stmt2->execute();
+                    $conn=null;
+
+                    while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+
+                        $uploader = $row2['Username'];
+
+                        echo "<form action='videopage.php' method='post'>";
+                        echo "<div class='videoplaybuttons'>";
+                        echo "<div class='col-sm-3'>";
+                        echo "<button class='button button1'>";
+                        echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                        echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                        echo "<p style='font-size:15px'>$uploader</p>";
+                        echo "</div>";
+                        echo "</button>";
+                        echo "</div>";
+                        echo '</form>';
+                    }
+                }
+            }    
         ?>
     </div>
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
