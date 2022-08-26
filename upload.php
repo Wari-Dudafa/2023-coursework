@@ -114,22 +114,24 @@
                                                                     //>
                                                                     
                                                                     //<get video id
-                                                                        //$stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE Username =:Username ;");
-                                                                        //$stmt2->bindParam(':Username', $_SESSION['CurrentUser']);
-                                                                        //$stmt2->execute();
+                                                                        $stmt2 = $conn->prepare("SELECT VideoID, UserID FROM tblusersvideos WHERE UserID =:userid AND (SELECT MAX(VideoID) FROM tblusersvideos);;");
+                                                                        $stmt2->bindParam(':userid', $userid);
+                                                                        $stmt2->execute();
 
-                                                                        //while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
-                                                                        //{
-                                                                            //$videoid=$row["VideoID"];
-                                                                        //}
-                                                                        //echo " VideoID: '".$videoid."'";
+                                                                        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
+                                                                        {
+                                                                        
+                                                                            $videoidmax=$row["VideoID"];
+                                                                            echo " VideoID: '".$videoidmax."'";
+                                                                        }
+                                                                        
                                                                     //>
 
                                                                     //<put id's into tblusersvideos
-                                                                        //$stmt3 = $conn->prepare("INSERT INTO TblUsersVideos (UserID,VideoID)VALUES (:userid,:videoid)");
-                                                                        //$stmt3->bindParam(':userid', $userid);
-                                                                        //$stmt3->bindParam(':videoid', $videoid);
-                                                                        //$stmt3->execute();
+                                                                        //$stmt_ = $conn->prepare("INSERT INTO TblUsersVideos (UserID,VideoID)VALUES (:userid,:videoid)");
+                                                                        //$stmt_->bindParam(':userid', $userid);
+                                                                        //$stmt_->bindParam(':videoid', $videoid);
+                                                                        //$stmt_->execute();
                                                                         //$conn=null;
                                                                     //>
                                                                 //>
