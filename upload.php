@@ -99,20 +99,32 @@
                                                                 $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location,FileName_thumbnail,Location_thumbnail)VALUES (null,:videotitle,'".$name."','".$target_file."','".$name_t."','".$target_file_t."')");
                                                                 $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
                                                                 $stmt->execute();
-                                                                $conn=null;
 
                                                                 //<uploaded by segment
-                                                                    //get user id
-                                                                    unset($stmt);
-                                                                    $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;");
-                                                                    $stmt->bindParam(':Username', $_SESSION['CurrentUser']);
-                                                                    $stmt->execute();
-                                                                    $userid = $stmt -> fetch();
-                                                                    echo "This user's id is: '".$userid."'.'>";
-                                                                    $conn=null;
-                                                                    
-                                                                    //get video id
+                                                                    //<get user id
+                                                                        $stmt1 = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;");
+                                                                        $stmt1->bindParam(':Username', $_SESSION['CurrentUser']);
+                                                                        $stmt1->execute();
 
+                                                                        while ($row = $stmt1->fetch(PDO::FETCH_ASSOC))
+                                                                        {
+                                                                            $userid=$row["UserID"];
+                                                                        }
+                                                                        //echo " UserID: '".$userid."'";
+                                                                    //>
+                                                                    
+                                                                    //<get video id
+                                                                        $stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE Username =:Username ;");
+                                                                        $stmt2->bindParam(':Username', $_SESSION['CurrentUser']);
+                                                                        $stmt2->execute();
+
+                                                                        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
+                                                                        {
+                                                                            $videoid=$row["VideoID"];
+                                                                        }
+                                                                        echo " VideoID: '".$videoid."'";
+                                                                        $conn=null;
+                                                                    //>
                                                                 //>
                                                                 //header('Location: watchvideo.php');***                                                        
                                                         
