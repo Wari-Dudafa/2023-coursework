@@ -69,9 +69,6 @@
             $stmt1 = $conn->prepare("SELECT * FROM tblusersvideos ORDER BY videoid DESC");
             $stmt1->execute();
 
-            
-
-
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
                 $location = $row['Location'];
