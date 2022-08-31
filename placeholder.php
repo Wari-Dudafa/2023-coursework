@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>placeholder</title>
+    <title>Home</title>
+    <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
-    <link rel="stylesheet" href="style.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -34,7 +34,6 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                         <?php
@@ -50,15 +49,17 @@
                         ?>
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                        <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </nav>
 
-
-    <h1>Homepage placeholder</h1>
+    <div class="container-fluid">    
+        <h1>Placeholder</h1>
+    </div>
 
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
 
