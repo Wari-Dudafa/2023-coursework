@@ -76,11 +76,10 @@
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
+                $VideoID = $row['VideoID'];
                 $location = $row['Location'];
                 $location_t = $row['Location_thumbnail'];
                 $VideoTitle = $row['VideoTitle'];
-                $Likes = $row['Likes'];
-                $Dislikes = $row['Dislikes'];
 
                 $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
 
@@ -101,6 +100,9 @@
                 echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
                 echo substr("<h4>$VideoTitle</h4>",0 ,30);
                 echo "<p style='font-size:15px'>$uploader</p>";
+                echo "<div class='videoidform'>";
+                echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                echo "</div>";
                 echo "</div>";
                 echo "</button>";
                 echo "</div>";

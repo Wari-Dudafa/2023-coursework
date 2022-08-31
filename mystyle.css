@@ -11,13 +11,21 @@
     cursor: pointer;
   }
   
-  .button1 {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #d3e7ff;
-  }
-  
-  .button1:hover {
-    background-color: #d3e7ff;
-    color: rgb(92, 92, 92);
-  }
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #d3e7ff;
+}
+
+.button1:hover {
+  background-color: #d3e7ff;
+  color: rgb(92, 92, 92);
+}
+
+.videoidform {
+  display: none;
+}
+
+.likebuttons {
+  padding-left: 75px;  
+}

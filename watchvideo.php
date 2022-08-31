@@ -75,8 +75,6 @@
                 $location = $row['Location'];
                 $location_t = $row['Location_thumbnail'];
                 $VideoTitle = $row['VideoTitle'];
-                $Likes = $row['Likes'];
-                $Dislikes = $row['Dislikes'];
 
                 $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
 
@@ -97,6 +95,9 @@
                 echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
                 echo substr("<h4>$VideoTitle</h4>",0 ,30);
                 echo "<p style='font-size:15px'>$uploader</p>";
+                echo "<div class='videoidform'>";
+                echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                echo "</div>";
                 echo "</div>";
                 echo "</button>";
                 echo "</div>";
@@ -109,7 +110,3 @@
 
 </body>
 </html>
-
-<!--echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-up'></span> $Likes  </button>";
-echo "<video src='".$location."' controls width='320px' height='180px'>";
-echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-down'></span> $Dislikes  </button><br>";-->

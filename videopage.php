@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home</title>
+    <title>Video</title>
     <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
 
@@ -59,36 +59,103 @@
     </nav>
 
 
-    <div class="container-fluid">                            
+    <div class="container-fluid">                 
+        <?php
+            $videoid = $_POST["VideoID"];
+            //print_r($videoid)."<br>";
+            include_once("connection.php");
+            $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID LIKE :videoid ;" );
+            $stmt->bindParam(':videoid', $_POST['VideoID']);
+            $stmt->execute();
+            $stmt1 = $conn->prepare("SELECT * FROM tblusersvideos ORDER BY videoid DESC");
+            $stmt1->execute();
+
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+
+                $location = $row['Location'];
+                $location_t = $row['Location_thumbnail'];
+                $VideoTitle = $row['VideoTitle'];
+                $Likes = $row['Likes'];
+                $Dislikes = $row['Dislikes'];
+
+                $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+
+                $userid = $row1['UserID'];
+
+                $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                $stmt2->bindParam(':Userid', $userid);
+                $stmt2->execute();
+
+                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+                $uploader = $row2['Username'];
+
+                //<video displayer
+                    echo "<div class='videoplaybuttons'>";
+                    echo "<div class='col-sm-6'>";
+                    echo "<div class='well' style='background-color: #d3e7ff;'>";
+                    echo "<div class='well' style='background-color: #b3d5ff;'>";
+                    echo substr("<h1>$VideoTitle</h1>",0 ,50);
+                    echo "<h3 style='font-size:15px'>$uploader</h3>";
+                    echo "<div class='likebuttons'>";
+                    echo "<button type='button'style='font-size:25px'> <span class='glyphicon glyphicon-thumbs-up'></span>$Likes</button>";
+                    echo "<button type='button'style='font-size:25px'> <span class='glyphicon glyphicon-thumbs-down'></span>$Dislikes</button><br>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<center><video src='".$location."' controls width='640px' height='360px'></center>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</div>";
+                //>
+            }
+            //$conn=null;    
+        ?>
+
         <?php
 
+
             include_once("connection.php");
-            
+            $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
+            $stmt->execute();
+            $stmt1 = $conn->prepare("SELECT * FROM tblusersvideos ORDER BY videoid DESC");
+            $stmt1->execute();
 
-            //$stmt = $conn->prepare("SELECT * FROM tblvideos WHERE ?? = '".$??."'");
-            //$stmt->execute();
-            //$conn=null;
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
-            //$row = $stmt->fetch(PDO::FETCH_ASSOC)
-            //$location = $row['Location'];
-            //$location_t = $row['Location_thumbnail'];
-            //$VideoTitle = $row['VideoTitle'];
-            //$Likes = $row['Likes'];
-            //$Dislikes = $row['Dislikes'];
+                $VideoID = $row['VideoID'];
+                $location = $row['Location'];
+                $location_t = $row['Location_thumbnail'];
+                $VideoTitle = $row['VideoTitle'];
 
-                
-            //echo "<div class='videoplaybuttons'>";
-            ////echo "<div class='col-sm-2'>";
-            //echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-            //echo substr("<h4>$VideoTitle</h4>",0 ,30);
-            //echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-up'></span> $Likes  </button>";
-            //echo "<video src='".$location."' controls width='320px' height='180px'>";
-            //echo "<button type='button'> <span class='glyphicon glyphicon-thumbs-down'></span> $Dislikes  </button><br>";
-            //echo "<p style='font-size:15px'>Uploaded by: --</p>";
-            ////echo "</div>";
-            //echo "</div>";
+                $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
 
+                $userid = $row1['UserID'];
 
+                $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                $stmt2->bindParam(':Userid', $userid);
+                $stmt2->execute();
+
+                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+                $uploader = $row2['Username'];
+
+                echo "<form action='videopage.php' method='post'>";
+                echo "<div class='videoplaybuttons'>";
+                echo "<div class='col-sm-3'>";
+                echo "<button class='button button1'>";
+                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                echo "<p style='font-size:15px'>$uploader</p>";
+                echo "<div class='videoidform'>";
+                echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                echo "</div>";
+                echo "</div>";
+                echo "</button>";
+                echo "</div>";
+                echo '</form>';
+            }
+            $conn=null;    
         ?>
     </div>
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
