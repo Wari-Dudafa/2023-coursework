@@ -71,6 +71,7 @@
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
+                $VideoID = $row['VideoID'];
                 $location = $row['Location'];
                 $location_t = $row['Location_thumbnail'];
                 $VideoTitle = $row['VideoTitle'];
