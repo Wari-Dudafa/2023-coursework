@@ -99,8 +99,8 @@
                     echo substr("<h1>$VideoTitle</h1>",0 ,50);
                     echo "<h3 style='font-size:15px'>$uploader</h3>";
                     echo "<div class='likebuttons'>";
-                    echo "<button type='button'style='font-size:25px'> <span class='glyphicon glyphicon-thumbs-up'></span>$Likes</button>";
-                    echo "<button type='button'style='font-size:25px'> <span class='glyphicon glyphicon-thumbs-down'></span>$Dislikes</button><br>";
+                    echo "<button type='button'style='font-size:15px'> <span class='glyphicon glyphicon-thumbs-up'></span>$Likes</button>";
+                    echo "<button type='button'style='font-size:15px'> <span class='glyphicon glyphicon-thumbs-down'></span>$Dislikes</button><br>";
                     echo "</div>";
                     echo "</div>";
                     echo "<center><video src='".$location."' controls width='640px' height='360px'></center>";
