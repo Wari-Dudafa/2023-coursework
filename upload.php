@@ -110,34 +110,30 @@
                                                                         {
                                                                             $userid=$row["UserID"];
                                                                         }
-                                                                        //echo " UserID: '".$userid."'";
                                                                     //>
                                                                     
                                                                     //<get video id
-                                                                        //$stmt2 = $conn->prepare("SELECT VideoID, UserID FROM tblusersvideos WHERE UserID =:userid AND (SELECT MAX(VideoID) FROM tblusersvideos);;");
-                                                                        //$stmt2->bindParam(':userid', $userid);
-                                                                        //$stmt2->execute();
+                                                                        $stmt2 = $conn->prepare("SELECT MAX(VideoID) FROM tblvideos;");
+                                                                        $stmt2->execute();
 
-                                                                        //while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
-                                                                        //{
-                                                                            //$videoidmax=$row["VideoID"];
-                                                                            //echo " VideoIDmax: '".$videoidmax."'";
-
-                                                                            //$videoid = $videoidmax + 1;
-                                                                        //}
+                                                                        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
+                                                                        {
+                                                                            $videoid=$row["MAX(VideoID)"];
+                                                                            //echo " VideoID: '".$videoid."'";
+                                                                        }
                                                                         
                                                                     //>
 
                                                                     //<put id's into tblusersvideos
-                                                                        //$stmt_ = $conn->prepare("INSERT INTO TblUsersVideos (UserID,VideoID)VALUES (:userid,:videoid)");
-                                                                        //$stmt_->bindParam(':userid', $userid);
-                                                                        //$stmt_->bindParam(':videoid', $videoid);
-                                                                        //$stmt_->execute();
-                                                                        //$conn=null;
+                                                                        $stmt_ = $conn->prepare("UPDATE TblVideos SET UserID = :userid WHERE VideoID = :videoid");
+                                                                        $stmt_->bindParam(':userid', $userid);
+                                                                        $stmt_->bindParam(':videoid', $videoid);
+                                                                        $stmt_->execute();
+                                                                        $conn=null;
                                                                     //>
                                                                 //>
                                                                 echo " <br>upload status: complete";
-                                                                //header('Location: watchvideo.php');***                                                        
+                                                                header('Location: watchvideo.php');                                                
                                                             }
                                                         }
                                             }

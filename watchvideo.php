@@ -66,8 +66,6 @@
             include_once("connection.php");
             $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
             $stmt->execute();
-            $stmt1 = $conn->prepare("SELECT * FROM tblusersvideos ORDER BY videoid DESC");
-            $stmt1->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
@@ -75,10 +73,8 @@
                 $location = $row['Location'];
                 $location_t = $row['Location_thumbnail'];
                 $VideoTitle = $row['VideoTitle'];
-
-                $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
-
-                $userid = $row1['UserID'];
+                $userid = $row['UserID'];
+                
 
                 $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
                 $stmt2->bindParam(':Userid', $userid);

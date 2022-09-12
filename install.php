@@ -13,6 +13,7 @@ FileName VARCHAR(250) NOT NULL,
 Location VARCHAR(250) NOT NULL,
 FileName_thumbnail VARCHAR(250) NOT NULL,
 Location_thumbnail VARCHAR(250) NOT NULL,
+UserID INT(10) NOT NULL,
 Likes INT(10) NOT NULL,
 Dislikes INT(10) NOT NULL)");
 $stmt->execute();
@@ -26,10 +27,11 @@ Password VARCHAR(500) NOT NULL)");
 $stmt->execute();
 $stmt->closeCursor();
 
-$stmt = $conn->prepare("DROP TABLE IF EXISTS TblUsersVideos;
-CREATE TABLE TblUsersVideos 
+$stmt = $conn->prepare("DROP TABLE IF EXISTS TblData;
+CREATE TABLE TblData 
 (UserID INT(6) NOT NULL,
-VideoID INT(9) NOT NULL)");
+VideoID INT(9) NOT NULL,
+LikeIndicator Int(1) NOT NULL)");
 $stmt->execute();
 $stmt->closeCursor();
 
