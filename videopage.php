@@ -18,7 +18,7 @@
 </head>
 <body> 
 
-    <nav class="navbar navbar-inverse" style="background-color: #002f63;">
+    <!--NavBar--><nav class="navbar navbar-inverse" style="background-color: #002f63;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="watchvideo.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
@@ -58,33 +58,75 @@
         </div>
     </nav>
 
-
     <div class="container-fluid">                 
-        <?php
-            $videoid = $_POST["VideoID"];
-            //print_r($videoid)."<br>";
+        <?php //main video displayer and background code
+
             include_once("connection.php");
+            $videoid = $_POST["VideoID"];
+            if (!isset($videoid)){   
+                header("Location:watchvideo.php");
+            }//There is no video id for what ever reason
+
             $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID LIKE :videoid ;" );
             $stmt->bindParam(':videoid', $_POST['VideoID']);
             $stmt->execute();
-
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
                 $location = $row['Location'];
                 $location_t = $row['Location_thumbnail'];
                 $VideoTitle = $row['VideoTitle'];
-                $Likes = $row['Likes'];
-                $Dislikes = $row['Dislikes'];
+                //$Likes = $row['Likes'];
+                //$Dislikes = $row['Dislikes'];
                 $userid = $row['UserID'];
 
-                $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
-                $stmt2->bindParam(':Userid', $userid);
-                $stmt2->execute();
-
-                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-
+                $getusername = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                $getusername->bindParam(':Userid', $userid);
+                $getusername->execute();
+                $row2 = $getusername->fetch(PDO::FETCH_ASSOC);
                 $uploader = $row2['Username'];
+
+                //<insert user and video id into the data table
+                    //< Get user id
+                        $getuserid = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username;");
+                        $getuserid->bindParam(':Username', $_SESSION['CurrentUser']);
+                        $getuserid->execute();
+
+                        while ($row = $getuserid->fetch(PDO::FETCH_ASSOC))
+                        {
+                            $currentuserid=$row["UserID"];
+                        }
+                    //>
+
+                    //< Cheching if user and video already exist in the databse
+
+                        $alreadyexist = $conn->prepare("SELECT * FROM TblData WHERE UserID = :userid AND VideoID = :videoid;)");
+                        $alreadyexist->bindParam(':userid', $currentuserid);
+                        $alreadyexist->bindParam(':videoid', $_POST['VideoID']);
+                        $alreadyexist->execute();
+                
+                        $count = $alreadyexist->rowCount();
+                        unset($alreadyexist);
+                        
+                        if ($count == 0){
+                            $DefaultLikeIndicator = 3;
+                            $data = $conn->prepare("INSERT INTO  tbldata (UserID,VideoID,LikeIndicator)VALUES (:userid,:videoid,:DefaultLikeIndicator)");
+                            $data->bindParam(':userid', $currentuserid);
+                            $data->bindParam(':videoid', $_POST['VideoID']);
+                            $data->bindParam(':DefaultLikeIndicator', $DefaultLikeIndicator);
+                            $data->execute();
+                        }
+                    //>
+
+                    //< Getting video view count
+                        $viewcount = $conn->prepare("SELECT * FROM TblData WHERE VideoID = :videoid;)");
+                        $viewcount->bindParam(':videoid', $_POST['VideoID']);
+                        $viewcount->execute();
+                
+                        $views = $viewcount->rowCount();
+                        unset($viewcount);
+                    //>
+                //>
 
                 //<video displayer
                     echo "<div class='videoplaybuttons'>";
@@ -92,22 +134,49 @@
                     echo "<div class='well' style='background-color: #d3e7ff;'>";
                     echo "<div class='well' style='background-color: #b3d5ff;'>";
                     echo substr("<h1>$VideoTitle</h1>",0 ,50);
-                    echo "<h3 style='font-size:15px'>$uploader</h3>";
+                    echo "<h3 style='font-size:20px'>$uploader</h3>";
+                    if ($views == 1){
+                        echo "<h3 style='font-size:15px'>$views view</h3>";
+                    }
+                    if ($views != 1){
+                        echo "<h3 style='font-size:15px'>$views views</h3>";
+                    }
                     echo "<div class='likebuttons'>";
-                    echo "<button type='button'style='font-size:15px'> <span class='glyphicon glyphicon-thumbs-up'></span>$Likes</button>";
-                    echo "<button type='button'style='font-size:15px'> <span class='glyphicon glyphicon-thumbs-down'></span>$Dislikes</button><br>";
+                    //echo "<button type='button'style='font-size:15px'> <span class='glyphicon glyphicon-thumbs-up'></span>$Likes</button>";
+                    //echo "<button type='button'style='font-size:15px'> <span class='glyphicon glyphicon-thumbs-down'></span>$Dislikes</button><br>";
                     echo "</div>";
                     echo "</div>";
                     echo "<center><video src='".$location."' controls width='640px' height='360px'></center>";
+                    echo "<form action='comments.php' method='post'>";
+                    echo "<div class='videoidform'>";
+                    echo "<input type='text' name='videoid' value='".$videoid."'>";
+                    echo "<input type='text' name='userid' value='".$currentuserid."'>";
+                    echo "</div>";
+                    echo "<h3 style='font-size:15px'>Comment:</h3>";
+                    echo "<textarea name='comment' id='textbox' class='form-control' rows='1' cols='1'></textarea>";
+                    echo "<span id='char_count'>0</span>";
+                    echo "<div id='commentbutton'> <button type='submit'>Comment</button> </div>";
+                    echo "</form>";
+                    //< Display comments
+                        $getcomments = $conn->prepare("SELECT * FROM tblcomments WHERE VideoID = :videoid ;");
+                        $getcomments->bindParam(':videoid', $_POST['VideoID']);
+                        $getcomments->execute();
+
+                        while ($row5 = $stmt->fetch(PDO::FETCH_ASSOC)){
+                            $comment = $row5['Comment'];
+                            echo "<h3 style='font-size:15px'>'".$comment."'</h3>";
+                            echo ($comment);
+                        }
+                    //<
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
+
                 //>
-            }
-            //$conn=null;    
+            }  
         ?>
 
-        <?php
+        <?php //Other displayed videos
 
 
             include_once("connection.php");
@@ -130,25 +199,29 @@
 
                 $uploader = $row2['Username'];
 
-                echo "<form action='videopage.php' method='post'>";
-                echo "<div class='videoplaybuttons'>";
-                echo "<div class='col-sm-3'>";
-                echo "<button class='button button1'>";
-                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                echo "<p style='font-size:15px'>$uploader</p>";
-                echo "<div class='videoidform'>";
-                echo "<input type='text' name='VideoID' value='".$VideoID."'>";
-                echo "</div>";
-                echo "</div>";
-                echo "</button>";
-                echo "</div>";
-                echo '</form>';
+                if ($VideoID == $_POST['VideoID']){   
+                    //do nothing
+                }else{
+                    echo "<form action='videopage.php' method='post'>";
+                    echo "<div class='videoplaybuttons'>";
+                    echo "<div class='col-sm-3'>";
+                    echo "<button class='button button1'>";
+                    echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                    echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                    echo "<p style='font-size:15px'>$uploader</p>";
+                    echo "<div class='videoidform'>";
+                    echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "</button>";
+                    echo "</div>";
+                    echo '</form>';
+                }
             }
             $conn=null;    
         ?>
     </div>
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
-
+    <script src="charcount.js"></script>
 </body>
 </html>

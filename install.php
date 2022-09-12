@@ -13,9 +13,7 @@ FileName VARCHAR(250) NOT NULL,
 Location VARCHAR(250) NOT NULL,
 FileName_thumbnail VARCHAR(250) NOT NULL,
 Location_thumbnail VARCHAR(250) NOT NULL,
-UserID INT(10) NOT NULL,
-Likes INT(10) NOT NULL,
-Dislikes INT(10) NOT NULL)");
+UserID INT(10) NOT NULL)");
 $stmt->execute();
 $stmt->closeCursor();
 
@@ -32,6 +30,14 @@ CREATE TABLE TblData
 (UserID INT(6) NOT NULL,
 VideoID INT(9) NOT NULL,
 LikeIndicator Int(1) NOT NULL)");
+$stmt->execute();
+$stmt->closeCursor();
+
+$stmt = $conn->prepare("DROP TABLE IF EXISTS TblComments;
+CREATE TABLE TblComments 
+(UserID INT(6) NOT NULL,
+VideoID INT(9) NOT NULL,
+Comment VARCHAR(250) NOT NULL)");
 $stmt->execute();
 $stmt->closeCursor();
 
