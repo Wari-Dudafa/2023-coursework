@@ -63,9 +63,11 @@
 
             include_once("connection.php");
             $videoid = $_POST["VideoID"];
+            
+            //There is no video id for what ever reason
             if (!isset($videoid)){   
                 header("Location:watchvideo.php");
-            }//There is no video id for what ever reason
+            }
 
             $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID LIKE :videoid ;" );
             $stmt->bindParam(':videoid', $_POST['VideoID']);
@@ -158,16 +160,32 @@
                     echo "<div id='commentbutton'> <button type='submit'>Comment</button> </div>";
                     echo "</form>";
                     //< Display comments
+                        echo "<div class='well' style='background-color: #b3d5ff;'>";
                         $getcomments = $conn->prepare("SELECT * FROM tblcomments WHERE VideoID = :videoid ;");
-                        $getcomments->bindParam(':videoid', $_POST['VideoID']);
+                        $getcomments->bindParam(':videoid', $videoid);
                         $getcomments->execute();
 
-                        while ($row5 = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        while ($row5 = $getcomments->fetch(PDO::FETCH_ASSOC)){
                             $comment = $row5['Comment'];
-                            echo "<h3 style='font-size:15px'>'".$comment."'</h3>";
-                            echo ($comment);
+                            $commenterid = $row5['UserID'];
+
+                            $getcommenter = $conn->prepare("SELECT * FROM tblusers WHERE UserID = :userid ;");
+                            $getcommenter->bindParam(':userid', $commenterid);
+                            $getcommenter->execute();
+
+                            while ($row6 = $getcommenter->fetch(PDO::FETCH_ASSOC)){
+
+                                $commenter = $row6['Username'];
+
+                                echo "<div class='well' style='background-color: #d3e7ff;'>";
+                                echo "<h3 style='font-size:15px'>'".$commenter."':</h3>";
+                                echo "<h3 style='font-size:15px'>'".$comment."'</h3>";
+                                echo "</div>";
+                            }
                         }
-                    //<
+                        echo "</div>";
+                        echo "</div>";
+                    //>
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
@@ -204,7 +222,7 @@
                 }else{
                     echo "<form action='videopage.php' method='post'>";
                     echo "<div class='videoplaybuttons'>";
-                    echo "<div class='col-sm-3'>";
+                    echo "<div class='col-sm-12'>";
                     echo "<button class='button button1'>";
                     echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
                     echo substr("<h4>$VideoTitle</h4>",0 ,30);
