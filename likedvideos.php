@@ -59,7 +59,6 @@
         </div>
     </nav>
 
-
     <div class="container-fluid">         
         <h2>Your liked videos:</h2>                   
         <?php
