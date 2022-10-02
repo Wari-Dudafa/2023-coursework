@@ -51,6 +51,7 @@
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                        <li><a href="likedvideos.php"> <span class='glyphicon glyphicon-thumbs-up'></span> Liked videos</a></li>
                         <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>

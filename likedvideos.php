@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Search results</title>
+    <title>Liked videos</title>
     <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
 
@@ -60,49 +60,68 @@
     </nav>
 
 
-    <div class="container-fluid">               
+    <div class="container-fluid">         
+        <h2>Your liked videos:</h2>                   
         <?php
-
-            //print_r($_POST)."<br>";
-            $searchvalue = $_POST["search"];
-            echo "<h2> Search results for: $searchvalue</h2>";
             include_once("connection.php");
+            $likeindicator = 1;
+            echo "<p style='font-size:15px'>1</p>";//--//
 
-            $partialsearch = "%" . $_POST['search'] . "%";
-            $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Videotitle LIKE :search;" );
-            $stmt->bindParam(':search', $partialsearch);
+            $stmt = $conn->prepare("SELECT * FROM tblusers WHERE UserId =:username;" );
+            $stmt->bindParam(':username', $_SESSION["CurrentUser"]);
             $stmt->execute();
+            echo "<p style='font-size:15px'>1.3</p>";//--//
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
-                $VideoID = $row['VideoID'];
-                $location = $row['Location'];
-                $location_t = $row['Location_thumbnail'];
-                $VideoTitle = $row['VideoTitle'];
                 $userid = $row['UserID'];
+                echo "<p style='font-size:15px'>1.5</p>";//--//
+                $stmt1 = $conn->prepare("SELECT * FROM tbldata WHERE UserId =:userid AND LikeIndicator = :likeindicator;" );
+                echo "<p style='font-size:15px'>1.9</p>";//--//
+                $stmt1->bindParam(':userid', $userid);
+                $stmt1->bindParam(':likeindicator', $likeindicator);
+                $stmt1->execute();
+                echo "<p style='font-size:15px'>2</p>";//--//
 
-                $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid;");
-                $stmt2->bindParam(':Userid', $userid);
-                $stmt2->execute();
+                while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
 
-                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                    $_VideoID = $row1['VideoID'];
+                    $stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;" );
+                    $stmt2->bindParam(':videoid', $_VideoID);
+                    $stmt2->execute();
+                    echo "<p style='font-size:15px'>3</p>";//--//
 
-                $uploader = $row2['Username'];
+                    while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                        $VideoID = $row2['VideoID'];
+                        $location = $row2['Location'];
+                        $location_t = $row2['Location_thumbnail'];
+                        $VideoTitle = $row2['VideoTitle'];
+                        $userid = $row2['UserID'];
 
-                echo "<form action='videopage.php' method='post'>";
-                echo "<div class='videoplaybuttons'>";
-                echo "<div class='col-sm-3'>";
-                echo "<button class='button button1'>";
-                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                echo "<p style='font-size:15px'>$uploader</p>";
-                echo "<div class='videoidform'>";
-                echo "<input type='text' name='VideoID' value='".$VideoID."'>";
-                echo "</div>";
-                echo "</div>";
-                echo "</button>";
-                echo "</div>";
-                echo '</form>';
+                        $stmt3 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid;");
+                        $stmt3->bindParam(':Userid', $userid);
+                        $stmt3->execute();
+
+                        $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+                        $uploader = $row2['Username'];
+
+                        echo "<form action='videopage.php' method='post'>";
+                        echo "<div class='videoplaybuttons'>";
+                        echo "<div class='col-sm-3'>";
+                        echo "<button class='button button1'>";
+                        echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                        echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                        echo "<p style='font-size:15px'>$uploader</p>";
+                        echo "<div class='videoidform'>";
+                        echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</button>";
+                        echo "</div>";
+                        echo '</form>';
+                    }
+                }
             }
             $conn=null;    
         ?>

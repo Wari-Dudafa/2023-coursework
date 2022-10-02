@@ -51,6 +51,7 @@
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
+                        <li><a href="likedvideos.php"> <span class='glyphicon glyphicon-thumbs-up'></span> Liked videos</a></li>
                         <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
@@ -63,7 +64,6 @@
 
             //< Getting video id
                 include_once("connection.php");
-                //$_SESSION['videoid'] = $_POST["VideoID"];
                 $videoid = $_POST["VideoID"];
                 
                 //There is no video id for what ever reason
@@ -239,11 +239,8 @@
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
-
                 //>
-            }  
-        
-        
+            }
             //<Other displayed videos
                 include_once("connection.php");
                 $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
