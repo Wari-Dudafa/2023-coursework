@@ -8,11 +8,11 @@ $hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT, ['cost' =
 $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;" );
 $stmt->bindParam(':Username', $_POST['Username']);
 $stmt->execute();
+
 header('Location: user.php');
 $_SESSION['LoginFeedback']="2";
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 { 
-    //if($row['Password'] == $hashed_password){
     if(password_verify($_POST["Password"], $row['Password'])){
         $_SESSION['CurrentUser']=$row["Username"];
         header('Location: watchvideo.php');

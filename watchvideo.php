@@ -62,7 +62,6 @@
     <div class="container-fluid">                            
         <?php
 
-
             include_once("connection.php");
             $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
             $stmt->execute();

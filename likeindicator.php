@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,23 +64,26 @@
         <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
     <!---->
 
-    <?php //Comment handler
+    <?php //Like indicator handler
         include_once("connection.php");
 
         $userid = $_POST["userid"];
-        $comment = $_POST["comment"];
+        $likeindicator = $_POST["likeindicator"];
         $videoid = $_POST["videoid"];
 
-        $stmt = $conn->prepare("INSERT INTO TblComments (UserID,VIdeoID,Comment)VALUES (:userid,:videoid,:comment)");
-        $stmt->bindParam(':userid', $userid);
-        $stmt->bindParam(':comment', $comment);
-        $stmt->bindParam(':videoid', $videoid);
-        $stmt->execute();
+        echo "UserID: $userid <br>";
+        echo "Like indicator: $likeindicator <br>";
+        echo "VideoID: $videoid <br>";
 
-        echo "<form id='commentposter' action='videopage.php' method='post'>";
+        echo "<form id='likeindicatorposter' action='videopage.php' method='post'>";
         echo "<input type='text' name='VideoID' value='".$videoid."'>";
         echo '</form>';
 
+        $stmt = $conn->prepare("UPDATE TblData SET LikeIndicator = :likeindicator WHERE VideoID = :videoid AND UserID = :userid");
+        $stmt->bindParam(':userid', $userid);
+        $stmt->bindParam(':videoid', $videoid);
+        $stmt->bindParam(':likeindicator', $likeindicator);
+        $stmt->execute();
         $conn=null;
     ?>
 </body>
