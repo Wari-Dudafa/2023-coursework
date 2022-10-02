@@ -101,9 +101,9 @@
                         $stmt3->bindParam(':Userid', $userid);
                         $stmt3->execute();
 
-                        $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                        $row4 = $stmt4->fetch(PDO::FETCH_ASSOC);
 
-                        $uploader = $row2['Username'];
+                        $uploader = $row4['Username'];
 
                         echo "<form action='videopage.php' method='post'>";
                         echo "<div class='videoplaybuttons'>";
