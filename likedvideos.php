@@ -64,23 +64,18 @@
         <?php
             include_once("connection.php");
             $likeindicator = 1;
-            echo "<p style='font-size:15px'>1</p>";//--//
 
-            $stmt = $conn->prepare("SELECT * FROM tblusers WHERE UserId =:username;" );
+            $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username=:username;" );
             $stmt->bindParam(':username', $_SESSION["CurrentUser"]);
             $stmt->execute();
-            echo "<p style='font-size:15px'>1.3</p>";//--//
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
                 $userid = $row['UserID'];
-                echo "<p style='font-size:15px'>1.5</p>";//--//
                 $stmt1 = $conn->prepare("SELECT * FROM tbldata WHERE UserId =:userid AND LikeIndicator = :likeindicator;" );
-                echo "<p style='font-size:15px'>1.9</p>";//--//
                 $stmt1->bindParam(':userid', $userid);
                 $stmt1->bindParam(':likeindicator', $likeindicator);
                 $stmt1->execute();
-                echo "<p style='font-size:15px'>2</p>";//--//
 
                 while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
 
@@ -88,7 +83,6 @@
                     $stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;" );
                     $stmt2->bindParam(':videoid', $_VideoID);
                     $stmt2->execute();
-                    echo "<p style='font-size:15px'>3</p>";//--//
 
                     while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
                         $VideoID = $row2['VideoID'];
@@ -101,7 +95,7 @@
                         $stmt3->bindParam(':Userid', $userid);
                         $stmt3->execute();
 
-                        $row4 = $stmt4->fetch(PDO::FETCH_ASSOC);
+                        $row4 = $stmt3->fetch(PDO::FETCH_ASSOC);
 
                         $uploader = $row4['Username'];
 
