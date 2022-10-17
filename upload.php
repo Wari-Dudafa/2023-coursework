@@ -163,13 +163,25 @@
                     <form method="post" action="" enctype="multipart/form-data">
                         <p>Video:</p><input type='file' name='file'><br>
                         <p>VideoTitle: </p><input type="text" name="Videotitle" value=""><br>
+                        <label for="tag">Add tags:</label>
+                        <select id="tag" name="tag">
+                            <option value="0">none</option>
+                            <option value="1">Education</option>
+                            <option value="2">Entertainment</option>
+                            <option value="3">Music</option>
+                            <option value="4">Politics</option>
+                            <option value="5">Sports</option>
+                            <option value="6">Travel</option>
+                            <option value="7">Comedy</option>
+                            <option value="8">Tutorials</option>
+                            <option value="9">Science and Technology</option>
+                        </select>
                         <p>Thumbnail:</p><input type='file' name='thumb'><br>
                         <center><input type="submit" name="but_upload" value="upload"></center><br>
                     </form>
             </div>
         </div>
         <div class="col-sm-4"></div>
-        
     </div>
 
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">

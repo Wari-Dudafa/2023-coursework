@@ -30,9 +30,7 @@
 		}
 		else
 		{
-			//$blankusername::closeCursor();
 			unset($blankusername);
-			//$blankusername = null;
 
 			if ($_POST["Username"]==""){
 				echo ("no");
