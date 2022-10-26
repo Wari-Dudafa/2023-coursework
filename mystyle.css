@@ -41,3 +41,12 @@
 .main {
   padding-top: 70px;
 }
+
+.new_videos {
+  padding-top: 10px;
+}
+
+.reccomended_videos {
+  max-height: 600px;
+  overflow-y: scroll;
+}
