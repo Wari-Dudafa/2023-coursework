@@ -30,3 +30,14 @@
   max-height: 300px;
   overflow-y: scroll;
 }
+
+.top_navbar {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.main {
+  padding-top: 70px;
+}

@@ -68,6 +68,11 @@
         $comment = $_POST["comment"];
         $videoid = $_POST["videoid"];
 
+        if (!isset($comment))
+        {   
+            header("Location:watchvideo.php");
+        }
+
         $stmt = $conn->prepare("INSERT INTO TblComments (UserID,VIdeoID,Comment)VALUES (:userid,:videoid,:comment)");
         $stmt->bindParam(':userid', $userid);
         $stmt->bindParam(':comment', $comment);
