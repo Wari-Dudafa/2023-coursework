@@ -56,6 +56,7 @@
                                 $name = $_FILES['file']['name'];
                                 $traget_dir = "tblvideos/";
                                 $target_file = $traget_dir . $_FILES["file"]["name"];
+                                $tag = $_POST["tag"];
                     
                                 //file type
                                 $videoFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -96,7 +97,7 @@
                                                             //echo "Still working!";
                                                             if (move_uploaded_file($_FILES['thumb']['tmp_name'],$target_file_t)) {
                                                                 
-                                                                $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location,FileName_thumbnail,Location_thumbnail)VALUES (null,:videotitle,'".$name."','".$target_file."','".$name_t."','".$target_file_t."')");
+                                                                $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location,FileName_thumbnail,Location_thumbnail,Tag)VALUES (null,:videotitle,'".$name."','".$target_file."','".$name_t."','".$target_file_t."','".$tag."')");
                                                                 $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
                                                                 $stmt->execute();
 
@@ -159,10 +160,12 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-4">
             <div class="well" style="background-color: #d3e7ff;">
-                <h1><center>Upload</center></h1>
+                <div class="well" style="background-color: #b3d5ff;">
+                    <h1><center>Upload</center></h1>
+                </div>
                     <form method="post" action="" enctype="multipart/form-data">
                         <p>Video:</p><input type='file' name='file'><br>
-                        <p>VideoTitle: </p><input type="text" name="Videotitle" value=""><br>
+                        <p>VideoTitle: </p><input type="text" name="Videotitle" value="">
                         <label for="tag">Add tags:</label>
                         <select id="tag" name="tag">
                             <option value="0">none</option>
