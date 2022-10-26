@@ -43,10 +43,13 @@
 }
 
 .new_videos {
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 .reccomended_videos {
-  max-height: 600px;
-  overflow-y: scroll;
+  max-height: 560px;
+  overflow-y: hidden;
+  background-color: aliceblue;
+  padding-bottom: 5px;
+  border-radius: 10px;
 }
