@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <title>Login/Sign up</title>
+    <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="clientvalidation.js"></script>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
