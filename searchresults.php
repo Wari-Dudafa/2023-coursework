@@ -4,7 +4,6 @@
     <title>Search results</title>
     <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Latest compiled and minified CSS -->

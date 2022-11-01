@@ -4,7 +4,6 @@
     <title>Branch</title>
     <link rel="stylesheet" href="mystyle.css">
     <link rel="icon" type="image/x-icon" href="BranchLogo.png">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <!-- Latest compiled and minified CSS -->
@@ -72,42 +71,76 @@
                     echo "<div class='reccomended_videos'>";
                     echo "<h3> Reccomended for you:</h3>";
                     include_once("connection.php");
-                    $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
+
+                    $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:username;");
+                    $stmt->bindParam(':username', $_SESSION['CurrentUser']);
                     $stmt->execute();
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    $stmt = $conn->prepare("SELECT * FROM tbldata WHERE UserID =:Userid ;");
+                    $stmt->bindParam(':Userid', $row['UserID']);
+                    $stmt->execute();
+
+                    $tagsarray = array();
+                    $currentarraypointer = 0;
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
                         $VideoID = $row['VideoID'];
-                        $location = $row['Location'];
-                        $location_t = $row['Location_thumbnail'];
-                        $VideoTitle = $row['VideoTitle'];
-                        $userid = $row['UserID'];
-                        
 
-                        $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
-                        $stmt2->bindParam(':Userid', $userid);
-                        $stmt2->execute();
+                        $stmt1 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;");
+                        $stmt1->bindParam(':videoid', $VideoID);
+                        $stmt1->execute();
 
-                        $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                        while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
 
-                        $uploader = $row2['Username'];
+                            //<Gets video details
+                                $VideoID = $row1['VideoID'];
+                                $location = $row1['Location'];
+                                $location_t = $row1['Location_thumbnail'];
+                                $VideoTitle = $row1['VideoTitle'];
+                                $userid = $row1['UserID'];
+                                $tag = $row1['Tag'];
 
-                        echo "<form action='videopage.php' method='post'>";
-                        echo "<div class='videoplaybuttons'>";
-                        echo "<div class='col-sm-3'>";
-                        echo "<button class='button button1'>";
-                        echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                        echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                        echo "<p style='font-size:15px'>$uploader</p>";
-                        echo "<div class='videoidform'>";
-                        echo "<input type='text' name='VideoID' value='".$VideoID."'>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</button>";
-                        echo "</div>";
-                        echo '</form>';
+                                if ($currentarraypointer < 10){
+                                    $tagsarray[$currentarraypointer] = $tag;
+                                    $currentarraypointer++;
+                                }
+                            //>
+
+                            //<Gets the uploader
+                                $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                                $stmt2->bindParam(':Userid', $userid);
+                                $stmt2->execute();
+                                $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                $uploader = $row2['Username'];
+                            //>
+
+                            echo "<form action='videopage.php' method='post'>";
+                            echo "<div class='videoplaybuttons'>";
+                            echo "<div class='col-sm-3'>";
+                            echo "<button class='button button1'>";
+                            echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                            echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                            echo "<p style='font-size:15px'>$uploader</p>";
+                            echo "<p style='font-size:15px'>$tag</p>";
+                            echo "<div class='videoidform'>";
+                            echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</button>";
+                            echo "</div>";
+                            echo '</form>';
+                        }
                     }
                     echo "</div>";
+                //>
+
+                //<Array of tags in video
+                    print_r ($tagsarray);
+                    function populartag($tagsarray) {
+
+                    }
                 //>
 
                 //<New videos
@@ -119,20 +152,21 @@
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
-                        $VideoID = $row['VideoID'];
-                        $location = $row['Location'];
-                        $location_t = $row['Location_thumbnail'];
-                        $VideoTitle = $row['VideoTitle'];
-                        $userid = $row['UserID'];
-                        
+                        //<Gets video details
+                            $VideoID = $row['VideoID'];
+                            $location = $row['Location'];
+                            $location_t = $row['Location_thumbnail'];
+                            $VideoTitle = $row['VideoTitle'];
+                            $userid = $row['UserID'];
+                        //>
 
-                        $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
-                        $stmt2->bindParam(':Userid', $userid);
-                        $stmt2->execute();
-
-                        $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-
-                        $uploader = $row2['Username'];
+                        //<Gets the uploader
+                            $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                            $stmt2->bindParam(':Userid', $userid);
+                            $stmt2->execute();
+                            $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+                            $uploader = $row2['Username'];
+                        //>
 
                         echo "<form action='videopage.php' method='post'>";
                         echo "<div class='videoplaybuttons'>";
