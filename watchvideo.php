@@ -69,43 +69,110 @@
             <?php
                 //<Reccomended videos
                     echo "<div class='reccomended_videos'>";
-                    echo "<h3> Reccomended for you:</h3>";
+                    echo "<h3> Recommended for you:</h3>";
                     include_once("connection.php");
 
-                    $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:username;");
-                    $stmt->bindParam(':username', $_SESSION['CurrentUser']);
-                    $stmt->execute();
-                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                    $stmt = $conn->prepare("SELECT * FROM tbldata WHERE UserID =:Userid ;");
-                    $stmt->bindParam(':Userid', $row['UserID']);
-                    $stmt->execute();
-
                     $tagsarray = array();
+                    $recovideosarray = array();
+                    $likesofrecovideosarray = array();
                     $currentarraypointer = 0;
 
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    //<Getting tag data
+                        $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:username;");
+                        $stmt->bindParam(':username', $_SESSION['CurrentUser']);
+                        $stmt->execute();
+                        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                        $VideoID = $row['VideoID'];
+                        $stmt = $conn->prepare("SELECT * FROM tbldata WHERE UserID =:Userid ;");
+                        $stmt->bindParam(':Userid', $row['UserID']);
+                        $stmt->execute();
 
-                        $stmt1 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;");
-                        $stmt1->bindParam(':videoid', $VideoID);
-                        $stmt1->execute();
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
-                        while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                            $VideoID = $row['VideoID'];
+
+                            $stmt1 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;");
+                            $stmt1->bindParam(':videoid', $VideoID);
+                            $stmt1->execute();
+
+                            while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
+
+                                //<Gets video details
+                                    $tag = $row1['Tag'];
+
+                                    if ($currentarraypointer < 10){
+                                        $tagsarray[$currentarraypointer] = $tag;
+                                        $currentarraypointer++;
+                                    }
+                                //>
+
+                                /*
+                                echo "<form action='videopage.php' method='post'>";
+                                echo "<div class='videoplaybuttons'>";
+                                echo "<div class='col-sm-3'>";
+                                echo "<button class='button button1'>";
+                                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                                echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                                echo "<p style='font-size:15px'>$uploader</p>";
+                                echo "<p style='font-size:15px'>$tag</p>";//Get rid of this when reccomendations are completed
+                                echo "<div class='videoidform'>";
+                                echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</button>";
+                                echo "</div>";
+                                echo '</form>';
+                                */
+                            }
+                        }
+                        $currentarraypointer = 0;
+                    //>
+
+                    //<Array of tags in video
+                        if (isset($populartag)){
+                            function populartag($tagsarray) {
+                                $values = array();
+                                foreach ($tagsarray as $v) {
+                                    if (isset($values[$v])) {
+                                        $values[$v] ++;
+                                    } else {
+                                        $values[$v] = 1;
+                                    }
+                                } 
+                                arsort($values);
+                                $modes = array();
+                                $x = $values[key($values)];
+                                reset($values); 
+                                foreach ($values as $key => $v) {
+                                    if ($v == $x) {
+                                        $modes[] = $key;
+                                    } else {
+                                        break;
+                                    }
+                                } 
+                                return $modes;
+                            }
+                            
+                            $populartag = populartag($tagsarray)[0];
+                        } else {
+                            $populartag = 0;
+                        }
+                    //>
+
+                    //<Get most watched tag
+                        $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Tag =:tag ;");
+                        $stmt->bindParam(':tag', $populartag);
+                        $stmt->execute();
+
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
                             //<Gets video details
-                                $VideoID = $row1['VideoID'];
-                                $location = $row1['Location'];
-                                $location_t = $row1['Location_thumbnail'];
-                                $VideoTitle = $row1['VideoTitle'];
-                                $userid = $row1['UserID'];
-                                $tag = $row1['Tag'];
-
-                                if ($currentarraypointer < 10){
-                                    $tagsarray[$currentarraypointer] = $tag;
-                                    $currentarraypointer++;
-                                }
+                                $VideoID = $row['VideoID'];
+                                $location = $row['Location'];
+                                $location_t = $row['Location_thumbnail'];
+                                $VideoTitle = $row['VideoTitle'];
+                                $userid = $row['UserID'];
+                                $tag = $row['Tag'];
                             //>
 
                             //<Gets the uploader
@@ -116,61 +183,56 @@
                                 $uploader = $row2['Username'];
                             //>
 
-                            echo "<form action='videopage.php' method='post'>";
-                            echo "<div class='videoplaybuttons'>";
-                            echo "<div class='col-sm-3'>";
-                            echo "<button class='button button1'>";
-                            echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                            echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                            echo "<p style='font-size:15px'>$uploader</p>";
-                            //echo "<p style='font-size:15px'>$tag</p>";//Get rid of this when reccomendations are completed
-                            echo "<div class='videoidform'>";
-                            echo "<input type='text' name='VideoID' value='".$VideoID."'>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</button>";
-                            echo "</div>";
-                            echo '</form>';
-                        }
-                    }
-                    echo "</div>";
-                //>
+                            if ($currentarraypointer < 10){
+                                $recovideosarray[$currentarraypointer] = $VideoID;
+                                $currentarraypointer++;
+                            }
 
-                //<Array of tags in video
-                if (isset($populartag)){
-                    function populartag($tagsarray) {
-                        $values = array();
-                        foreach ($tagsarray as $v) {
-                            if (isset($values[$v])) {
-                                $values[$v] ++;
-                            } else {
-                                $values[$v] = 1;
-                            }
-                        } 
-                        arsort($values);
-                        $modes = array();
-                        $x = $values[key($values)];
-                        reset($values); 
-                        foreach ($values as $key => $v) {
-                            if ($v == $x) {
-                                $modes[] = $key;
-                            } else {
-                                break;
-                            }
-                        } 
-                        return $modes;
-                    }
-                    
-                    $populartag = populartag($tagsarray)[0];
-                } else {
-                    $populartag = 0;
-                }
+                            //<Displayer
+                                echo "<form action='videopage.php' method='post'>";
+                                echo "<div class='videoplaybuttons'>";
+                                echo "<div class='col-sm-3'>";
+                                echo "<button class='button button1'>";
+                                echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                                echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                                echo "<p style='font-size:15px'>$tag - $uploader</p>";
+                                echo "<div class='videoidform'>";
+                                echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                                echo "</div>";
+                                echo "</div>";
+                                echo "</button>";
+                                echo "</div>";
+                                echo '</form>';
+                            //>
+                        }
+                        $currentarraypointer = 0;
+                    //>
+
+                    //<Get likes
+                        while($currentarraypointer < 10){
+                            $likes = $conn->prepare("SELECT * FROM TblData WHERE LikeIndicator = 1 AND VideoID = :videoid;)");
+                            $likes->bindParam(':videoid', $recovideosarray[$currentarraypointer]);
+                            $likes->execute();
+
+                            $likesofrecovideosarray[$currentarraypointer] = $likes->rowCount();
+                            $currentarraypointer++;
+                            
+                        }
+                        $currentarraypointer = 0;
+                    //>
+
+                    echo "VideoID ";
+                    print_r($recovideosarray);
+                    echo "<br>";
+                    echo "LikeCounter ";
+                    print_r($likesofrecovideosarray);
+
+                    echo "</div>";
                 //>
 
                 //<New videos
                     echo "<div class='new_videos'>";
                     echo "<h3> New videos:</h3>";
-                    include_once("connection.php");
                     $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
                     $stmt->execute();
 
@@ -192,20 +254,22 @@
                             $uploader = $row2['Username'];
                         //>
 
-                        echo "<form action='videopage.php' method='post'>";
-                        echo "<div class='videoplaybuttons'>";
-                        echo "<div class='col-sm-3'>";
-                        echo "<button class='button button1'>";
-                        echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
-                        echo substr("<h4>$VideoTitle</h4>",0 ,30);
-                        echo "<p style='font-size:15px'>$uploader</p>";
-                        echo "<div class='videoidform'>";
-                        echo "<input type='text' name='VideoID' value='".$VideoID."'>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</button>";
-                        echo "</div>";
-                        echo '</form>';
+                        //<Displayer
+                            echo "<form action='videopage.php' method='post'>";
+                            echo "<div class='videoplaybuttons'>";
+                            echo "<div class='col-sm-3'>";
+                            echo "<button class='button button1'>";
+                            echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
+                            echo substr("<h4>$VideoTitle</h4>",0 ,30);
+                            echo "<p style='font-size:15px'>$uploader</p>";
+                            echo "<div class='videoidform'>";
+                            echo "<input type='text' name='VideoID' value='".$VideoID."'>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</button>";
+                            echo "</div>";
+                            echo '</form>';
+                        //>
                     }
                     echo "</div>";
                 //>
