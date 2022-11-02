@@ -123,7 +123,7 @@
                             echo "<img src='".$location_t."' controls width='240px' height='135px' alt='thumbnail'>";
                             echo substr("<h4>$VideoTitle</h4>",0 ,30);
                             echo "<p style='font-size:15px'>$uploader</p>";
-                            echo "<p style='font-size:15px'>$tag</p>";
+                            //echo "<p style='font-size:15px'>$tag</p>";//Get rid of this when reccomendations are completed
                             echo "<div class='videoidform'>";
                             echo "<input type='text' name='VideoID' value='".$VideoID."'>";
                             echo "</div>";
@@ -137,10 +137,34 @@
                 //>
 
                 //<Array of tags in video
-                    print_r ($tagsarray);
+                if (isset($populartag)){
                     function populartag($tagsarray) {
-
+                        $values = array();
+                        foreach ($tagsarray as $v) {
+                            if (isset($values[$v])) {
+                                $values[$v] ++;
+                            } else {
+                                $values[$v] = 1;
+                            }
+                        } 
+                        arsort($values);
+                        $modes = array();
+                        $x = $values[key($values)];
+                        reset($values); 
+                        foreach ($values as $key => $v) {
+                            if ($v == $x) {
+                                $modes[] = $key;
+                            } else {
+                                break;
+                            }
+                        } 
+                        return $modes;
                     }
+                    
+                    $populartag = populartag($tagsarray)[0];
+                } else {
+                    $populartag = 0;
+                }
                 //>
 
                 //<New videos
