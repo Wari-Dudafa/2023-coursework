@@ -203,15 +203,15 @@
                     //>
 
                     //<Display videos
-                        while ($currentarraypointer < 11){
-                            $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid ;");
+                        
+                        while ($currentarraypointer < 7){
                             $j = 9 - $currentarraypointer;
-                            $stmt->bindParam(':videoid', $reconvideosdata[$j][1]);
+                            $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid ;");
+                            $stmt->bindParam(':videoid', $sorted_reconvideosdata[$j][1]);
                             $stmt->execute();
 
-                            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
                             //<Gets video details
+                                $row = $stmt->fetch(PDO::FETCH_ASSOC);
                                 $VideoID = $row['VideoID'];
                                 $location = $row['Location'];
                                 $location_t = $row['Location_thumbnail'];
@@ -244,7 +244,8 @@
                                 echo '</form>';
                             //>
                             $currentarraypointer++;
-                        }
+                            }
+                        //}
         
                     //>
 
@@ -298,8 +299,6 @@
             ?>
         </div>
     </div>
-    
-    <!--nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;"-->
 
 </body>
 </html>

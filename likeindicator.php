@@ -66,27 +66,29 @@
         </div>
     <!---->
 
-    <?php //Like indicator handler
-        include_once("connection.php");
+    <div class="videoidform">
+        <?php //Like indicator handler
+            include_once("connection.php");
 
-        $userid = $_POST["userid"];
-        $likeindicator = $_POST["likeindicator"];
-        $videoid = $_POST["videoid"];
+            $userid = $_POST["userid"];
+            $likeindicator = $_POST["likeindicator"];
+            $videoid = $_POST["videoid"];
 
-        echo "UserID: $userid <br>";
-        echo "Like indicator: $likeindicator <br>";
-        echo "VideoID: $videoid <br>";
+            echo "UserID: $userid <br>";
+            echo "Like indicator: $likeindicator <br>";
+            echo "VideoID: $videoid <br>";
 
-        echo "<form id='likeindicatorposter' action='videopage.php' method='post'>";
-        echo "<input type='text' name='VideoID' value='".$videoid."'>";
-        echo '</form>';
+            echo "<form id='likeindicatorposter' action='videopage.php' method='post'>";
+            echo "<input type='text' name='VideoID' value='".$videoid."'>";
+            echo '</form>';
 
-        $stmt = $conn->prepare("UPDATE TblData SET LikeIndicator = :likeindicator WHERE VideoID = :videoid AND UserID = :userid");
-        $stmt->bindParam(':userid', $userid);
-        $stmt->bindParam(':videoid', $videoid);
-        $stmt->bindParam(':likeindicator', $likeindicator);
-        $stmt->execute();
-        $conn=null;
-    ?>
+            $stmt = $conn->prepare("UPDATE TblData SET LikeIndicator = :likeindicator WHERE VideoID = :videoid AND UserID = :userid");
+            $stmt->bindParam(':userid', $userid);
+            $stmt->bindParam(':videoid', $videoid);
+            $stmt->bindParam(':likeindicator', $likeindicator);
+            $stmt->execute();
+            $conn=null;
+        ?>
+    </div>
 </body>
 </html>
