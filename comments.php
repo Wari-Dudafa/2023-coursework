@@ -64,7 +64,6 @@
                 </div>
             </nav>
         </div>
-        <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
     <!---->
 
     <?php //Comment handler

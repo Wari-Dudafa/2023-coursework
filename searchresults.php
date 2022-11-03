@@ -113,7 +113,5 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
-
 </body>
 </html>
