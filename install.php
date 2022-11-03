@@ -1,7 +1,7 @@
 <?php
     include_once("connection.php");
 
-    #Database creation command: CREATE database dtbBranch;
+    #Database creation command: "CREATE database dtbBranch";
 
     $stmt = $conn->prepare("DROP TABLE IF EXISTS TblVideos;
     CREATE TABLE TblVideos 
