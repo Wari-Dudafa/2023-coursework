@@ -68,7 +68,7 @@
                                 
             <?php
                 //<Reccomended videos
-                    echo "<div class='reccomended_videos'>";
+                    echo "<div class='recommended_videos'>";
                     echo "<h3> Recommended for you:</h3>";
                     include_once("connection.php");
 
@@ -244,8 +244,7 @@
                                 echo '</form>';
                             //>
                             $currentarraypointer++;
-                            }
-                        //}
+                        }
         
                     //>
 

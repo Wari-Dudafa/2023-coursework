@@ -151,6 +151,7 @@
                                 echo "<h3 style='font-size:15px'>$views views</h3>";
                             }
                         //>
+                        
                         //< Likes/Dislikes
 
                             $likeindication = 1;
