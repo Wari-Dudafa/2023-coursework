@@ -59,7 +59,7 @@ body::-webkit-scrollbar {
 }
 
 .recommended_videos {
-  max-height: 5600px;
+  max-height: 560px;
   overflow-y: hidden;
   background-color: aliceblue;
   padding-bottom: 5px;
