@@ -40,6 +40,14 @@ body::-webkit-scrollbar {
 .CommentScroll {
   max-height: 300px;
   overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 1px;
+}
+
+.CommentScroll::-webkit-scrollbar {
+  display: none;
 }
 
 .top_navbar {
@@ -68,4 +76,20 @@ body::-webkit-scrollbar {
 
 input.form-control {
   width: 200px!important;
+}
+
+.comment{
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding-bottom: 5px;
+  border: 2px solid #969696;
+}
+
+.comment:hover {
+  background-color: #cbe2ff;
+  color: rgb(92, 92, 92);
+}
+.likebutton{
+  border: 2px solid #969696;
 }

@@ -141,7 +141,7 @@
                         echo "<div class='col-sm-6'>";
                         echo "<div class='well' style='background-color: #d3e7ff;'>";
                         echo "<div class='well' style='background-color: #b3d5ff;'>";
-                        echo substr("<h1>$VideoTitle</h1>",0 ,50);
+                        echo substr("<h1>$VideoTitle</h1>",0 ,70);
                         echo "<h3 style='font-size:20px'>$uploader</h3>";
                         //<View counter
                             if ($views == 1){
@@ -178,25 +178,30 @@
                             //>
 
                             //< Likes
+                                echo "<div class='col-sm-1'>";
                                 echo "<form action='likeindicator.php' method='post'>";
                                 echo "<div class='videoidform'>";
                                 echo "<input type='text' name='videoid' value='".$videoid."'>";
                                 echo "<input type='text' name='userid' value='".$currentuserid."'>";
                                 echo "<input type='text' name='likeindicator' value='1'>";
                                 echo "</div>";
-                                echo "<button type='submit'> <span class='glyphicon glyphicon-thumbs-up'></span> $likecount</button>";
+                                echo "<button type='submit' class='btn btn-light'> <span class='glyphicon glyphicon-thumbs-up'></span> $likecount</button>";
                                 echo "</form>";
+                                echo "</div>";
                             //>
 
                             //< Dislikes
+                                echo "<div class='col-sm-2'>";
                                 echo "<form action='likeindicator.php' method='post'>";
                                 echo "<div class='videoidform'>";
                                 echo "<input type='text' name='videoid' value='".$videoid."'>";
                                 echo "<input type='text' name='userid' value='".$currentuserid."'>";
                                 echo "<input type='text' name='likeindicator' value='2'>";
                                 echo "</div>";
-                                echo "<button type='submit'> <span class='glyphicon glyphicon-thumbs-down'></span> $dislikecount</button>";
+                                echo "<button type='submit' class='btn btn-light'> <span class='glyphicon glyphicon-thumbs-down'></span> $dislikecount</button>";
                                 echo "</form>";
+                                echo "</div>";
+                                echo "<br>";
                             //>
                         //>
                         echo "</div>";
@@ -211,8 +216,8 @@
                         echo "<h3 style='font-size:15px'>Comment:</h3>";
                         echo "<textarea name='comment' id='textbox' class='form-control' rows='1' cols='1'></textarea>";
                         echo "<span id='char_count'>0</span>";
-                        echo "<div id='commentbutton'> <button type='submit'>Comment</button> </div>";
-                        echo "</form>";
+                        echo "<center><div id='commentbutton'> <button type='submit' class='btn btn-info'>Comment</button> </div>";
+                        echo "</form></center>";
                         //< Display comments
                             echo "<div class='well' style='background-color: #b3d5ff;'>";
                             echo "<div class='CommentScroll';'>";
@@ -233,7 +238,7 @@
 
                                     $commenter = $row6['Username'];
 
-                                    echo "<div class='well' style='background-color: #d3e7ff;'>";
+                                    echo "<div class='comment'>";
                                     echo "<h3 style='font-size:14px'>".$commenter.":</h3>";
                                     echo "<h3 style='font-size:13px'>".$comment."</h3>";
                                     echo "</div>";

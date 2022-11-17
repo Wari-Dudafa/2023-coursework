@@ -175,23 +175,41 @@
                         <h1><center>Upload</center></h1>
                     </div>
                         <form method="post" action="" enctype="multipart/form-data">
-                            <p>Video:</p><input type='file' name='file'><br>
-                            <p>VideoTitle: </p><input type="text" name="Videotitle" value="">
-                            <label for="tag">Add tags:</label>
-                            <select id="tag" name="tag">
-                                <option value="0">none</option>
-                                <option value="1">Education</option>
-                                <option value="2">Entertainment</option>
-                                <option value="3">Music</option>
-                                <option value="4">Politics</option>
-                                <option value="5">Sports</option>
-                                <option value="6">Travel</option>
-                                <option value="7">Comedy</option>
-                                <option value="8">Tutorials</option>
-                                <option value="9">Science and Technology</option>
-                            </select>
-                            <p>Thumbnail:</p><input type='file' name='thumb'><br>
-                            <center><input type="submit" name="but_upload" value="upload"></center><br>
+                            <div class="form-group">
+
+                                <div class="form-group">
+                                    <label for="videotitle">Video title</label>
+                                    <input type="text" name="Videotitle" class="form-control" id="videotitle" aria-describedby="emailHelp" placeholder="Enter Title">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="selecttag">Select tag</label>
+                                    <select id="tag" name="tag" class="form-control" id="selecttag">
+                                        <option value="0">none</option>
+                                        <option value="1">Education</option>
+                                        <option value="2">Entertainment</option>
+                                        <option value="3">Music</option>
+                                        <option value="4">Politics</option>
+                                        <option value="5">Sports</option>
+                                        <option value="6">Travel</option>
+                                        <option value="7">Comedy</option>
+                                        <option value="8">Tutorials</option>
+                                        <option value="9">Science and Technology</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="videoupload">Video upload</label>
+                                    <input type="file" name='file' class="form-control-file" id="videoupload">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="thumbnailupload">Thumbnail upload</label>
+                                    <input type="file" name='thumb' class="form-control-file" id="thumbnailupload">
+                                </div>
+
+                                <center><input type="submit" class="btn btn-primary btn-lg" name="but_upload" value="upload"></center><br>
+                            </div>
                         </form>
                 </div>
             </div>
