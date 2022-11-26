@@ -25,7 +25,6 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <!--<li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>-->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
@@ -67,7 +66,6 @@
         <div class="container-fluid">               
             <?php
 
-                //print_r($_POST)."<br>";
                 $searchvalue = $_POST["search"];
                 echo "<h3> Search results for: $searchvalue</h3>";
                 include_once("connection.php");

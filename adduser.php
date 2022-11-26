@@ -3,7 +3,6 @@
 	$_SESSION['LoginFeedback']="3";
 	include_once("connection.php");
 	array_map("htmlspecialchars", $_POST);
-
 	
 	$blankusername = $conn->prepare("select * from TblUsers where Username = :Username;)");
 	$blankusername->bindParam(':Username', $_POST["Username"]);

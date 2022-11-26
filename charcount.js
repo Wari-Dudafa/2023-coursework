@@ -3,9 +3,6 @@ let characterCounter = document.getElementById("char_count");
 let button = document.getElementById("commentbutton");
 button.style.display = "none";
 
-
-
-
 const countCharacters = () => {
         let numOfEnteredChars = textArea.value.length;
     let counter = numOfEnteredChars;

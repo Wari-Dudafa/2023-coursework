@@ -73,7 +73,7 @@
     <div class="col-sm-6">
         <div class="main">
             <div class="LoginFeedback">
-                <center><h2><?php
+                <center><h3 style="color: #ff0000;"><?php
                     session_start();
                     //echo "" . $_SESSION["LoginFeedback"];
                     if (!isset($_SESSION['LoginFeedback']))
@@ -102,7 +102,7 @@
                     {
                         echo "Successfully logged out";
                     }
-                ?></h2></center>
+                ?></h3></center>
             </div>
 
             <div class="tab">
@@ -115,10 +115,7 @@
                     <h2><center>Sign up</center></h2><br>
                     <div class="form-group">
                         <form action="adduser.php" method="post">
-                            <center>
-                                
-                                <!--Username:<input type="text" name="Username" style="margin-bottom: 10px;"><br>
-                                Password:<input type="password" name="Password" style= "margin-bottom: 10px;"><br>-->              
+                            <center>      
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Username</label>
@@ -144,10 +141,7 @@
                     <h2><center>Login</center></h2><br>
                     <div class="form-group">
                         <form action="loginuser.php" method="post">
-                            <center>
-
-                                <!--Username:<input type="text" name="Username" style="margin-bottom: 10px;"><br>
-                                Password:<input type="password" name="Password" style= "margin-bottom: 10px;"><br>-->              
+                            <center>         
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Username</label>
@@ -161,13 +155,14 @@
 
                                 <input type="submit" class="btn btn-primary btn-lg" value="Login">
 
-                                <div class="container">
-                                    <a href="#" data-toggle="popover" title="" data-content="Think hard and try to remember it. Your welcome!">Forgot your password?</a><br>
+                                <div class="thingsatthebottomoftheloginpage">
                                     
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                         <label class="form-check-label" for="exampleCheck1">Remeber me</label>
                                     </div>
+
+                                    <a href="#" data-toggle="popover" title="" data-content="For security reasons, we dont store your password so try to rememeber it.">Forgot your password?</a><br>
                                 </div>
 
                             </center>

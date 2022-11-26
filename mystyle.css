@@ -87,9 +87,15 @@ input.form-control {
 }
 
 .comment:hover {
-  background-color: #cbe2ff;
+  background-color: #edf5ff;
   color: rgb(92, 92, 92);
 }
 .likebutton{
   border: 2px solid #969696;
 }
+
+.thingsatthebottomoftheloginpage{
+  padding-top: 10px;
+  margin: 0px;
+}
+

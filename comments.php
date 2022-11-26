@@ -27,7 +27,6 @@
                     </div>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <!--<li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>-->
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                                 <?php

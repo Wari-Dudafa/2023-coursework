@@ -1,4 +1,4 @@
-<?php
+<?php // Get mode in an array
     $tagsarray = array(1, 3, 6, 9, 1, 5, 0, 1, 9, 1);
     
     function populartag($tagsarray) {
