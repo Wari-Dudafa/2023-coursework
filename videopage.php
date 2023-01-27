@@ -26,11 +26,12 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
+                        <!--The image at the top corner of the screen-->
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
+                                // Checks is a user is logged in
                                 session_start();
-                                if (!isset($_SESSION['CurrentUser']))
-                                {   
+                                if (!isset($_SESSION['CurrentUser'])){   
                                     header("Location:user.php");
                                     echo "Please login to continue<br>";
                                 }else{
@@ -52,6 +53,7 @@
                                     </div>
                             </form>
                             </li>
+                            <!--The dropdown icon menu-->
                             <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
                             <li><a href="likedvideos.php"> <span class='glyphicon glyphicon-thumbs-up'></span> Liked videos</a></li>
                             <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -76,12 +78,14 @@
                     }
                 //>
 
+                // Gets videos that have been liked by the user
                 $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID LIKE :videoid ;" );
                 $stmt->bindParam(':videoid', $_POST['VideoID']);
                 $stmt->execute();
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
+                    // Gets video information
                     $location = $row['Location'];
                     $location_t = $row['Location_thumbnail'];
                     $VideoTitle = $row['VideoTitle'];
@@ -99,8 +103,7 @@
                             $getuserid->bindParam(':Username', $_SESSION['CurrentUser']);
                             $getuserid->execute();
 
-                            while ($row = $getuserid->fetch(PDO::FETCH_ASSOC))
-                            {
+                            while ($row = $getuserid->fetch(PDO::FETCH_ASSOC)){
                                 $currentuserid=$row["UserID"];
                             }
                         //>
@@ -115,6 +118,7 @@
                             $count = $alreadyexist->rowCount();
                             unset($alreadyexist);
                             
+                            // It does
                             if ($count == 0){
                                 $DefaultLikeIndicator = 3;
                                 $data = $conn->prepare("INSERT INTO  tbldata (UserID,VideoID,LikeIndicator)VALUES (:userid,:videoid,:DefaultLikeIndicator)");
@@ -217,6 +221,7 @@
                         echo "<span id='char_count'>0</span>";
                         echo "<center><div id='commentbutton'> <button type='submit' class='btn btn-info'>Comment</button> </div>";
                         echo "</form></center>";
+
                         //< Display comments
                             echo "<div class='well' style='background-color: #b3d5ff;'>";
                             echo "<div class='CommentScroll';'>";
@@ -275,7 +280,7 @@
                         //>
 
                         if ($VideoID == $_POST['VideoID']){   
-                            //do nothing
+                            // Do nothing
                         }else{
                             echo "<form action='videopage.php' method='post'>";
                             echo "<div class='videoplaybuttons'>";

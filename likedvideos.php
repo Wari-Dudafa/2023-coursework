@@ -28,6 +28,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
+                                // Checking if the user is logged in
                                 session_start();
                                 if (!isset($_SESSION['CurrentUser']))
                                 {   

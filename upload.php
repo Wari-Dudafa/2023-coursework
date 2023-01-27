@@ -21,15 +21,16 @@
         <nav class="navbar navbar-inverse" style="background-color: #002f63;">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <!--Logo in the right corner-->
                     <a href="watchvideo.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <!--<li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>-->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
                                 session_start();
+                                // Checks if the user is logged in
                                 if (!isset($_SESSION['CurrentUser']))
                                 {   
                                     header("Location:user.php");
@@ -53,6 +54,7 @@
                                     </div>
                             </form>
                             </li>
+                            <!--Icons and dropdown menus-->
                             <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
                             <li><a href="likedvideos.php"> <span class='glyphicon glyphicon-thumbs-up'></span> Liked videos</a></li>
                             <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -63,63 +65,63 @@
         </nav>
     </div>
 
-    <?php //upload
+    <?php // Video upload handler
         include_once("connection.php");             
 
         if(isset($_POST['but_upload'])){
-            $maxsize = 104857600; //5MB
+            $maxsize = 10048576; // Approx 10MB
 
             $name = $_FILES['file']['name'];
-            $traget_dir = "tblvideos/";//target folder files will be uploaded to
-            $target_file = $traget_dir . $_FILES["file"]["name"];//name of file from the form
-            $tag = $_POST["tag"];//video tag
+            $traget_dir = "tblvideos/";// Target folder files will be uploaded to
+            $target_file = $traget_dir . $_FILES["file"]["name"];// Name of file from the form
+            $tag = $_POST["tag"];// Video tag
 
-            //file type
+            //File type
             $videoFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-            //acceptable extensions
+            // Acceptable extensions
             $extensions_arr = array("mp4", "mov", "mpeg");// accepted file types
 
-            //Checks the video extension
-            //For picture uploads skip this if and go to the next
+            // Checks the video extension
+            // For picture uploads skip this if and go to the next
             if (in_array($videoFileType, $extensions_arr)){
                 
-                //now we compare file size
+                // Now we compare file size
                 if (($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]['size'] == 0)){
                     echo "<br>upload status: file too big";
                 }else{
-                    //Picture upload starts here
-                    //Thumnbnail upload
+                    // Picture upload starts here
+                    // Thumnbnail upload handler
                     if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
 
                         $name_t = $_FILES['thumb']['name'];
                         $traget_dir_t = "tblvideos/";
                         $target_file_t = $traget_dir_t . $_FILES["thumb"]["name"];
             
-                        //file type
+                        // File type
                         $videoFileType_t = strtolower(pathinfo($target_file_t,PATHINFO_EXTENSION));
             
-                        //acceptable file types
+                        // Acceptable file types
                         $extensions_arr_t = array("png", "jpeg", "jpg");
             
-                        //Checks the video extension
+                        // Checks the video extension
                         if (in_array($videoFileType_t, $extensions_arr_t)){
             
-                            //now we compare file size
+                            // Now we compare file size
                             if (($_FILES['thumb']['size'] >= $maxsize) || ($_FILES["thumb"]['size'] == 0)){
                                 echo "File too large.";
                             }else{
             
-                                //echo "Still working!";
+                                // Starts uploading
                                 if (move_uploaded_file($_FILES['thumb']['tmp_name'],$target_file_t)) {
                                     
-                                    //Uploading to table bit
+                                    // Uploading data to table
                                     $stmt = $conn->prepare("INSERT INTO TblVideos (VideoID,VideoTitle,FileName,Location,FileName_thumbnail,Location_thumbnail,Tag)VALUES (null,:videotitle,'".$name."','".$target_file."','".$name_t."','".$target_file_t."','".$tag."')");
                                     $stmt->bindParam(':videotitle', $_POST["Videotitle"]);
                                     $stmt->execute();
 
-                                    //<uploaded by segment
-                                        //<get user id
+                                    //<Uploaded by segment
+                                        //<Gets user id
                                             $stmt1 = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;");
                                             $stmt1->bindParam(':Username', $_SESSION['CurrentUser']);
                                             $stmt1->execute();
@@ -130,7 +132,7 @@
                                             }
                                         //>
                                         
-                                        //<get video id
+                                        //<Gets video id
                                             $stmt2 = $conn->prepare("SELECT MAX(VideoID) FROM tblvideos;");
                                             $stmt2->execute();
 
@@ -142,7 +144,7 @@
                                             
                                         //>
 
-                                        //<put id's into tblusersvideos
+                                        //<Puts user id's into tblusersvideos
                                             $stmt_ = $conn->prepare("UPDATE TblVideos SET UserID = :userid WHERE VideoID = :videoid");
                                             $stmt_->bindParam(':userid', $userid);
                                             $stmt_->bindParam(':videoid', $videoid);
@@ -166,7 +168,8 @@
         }
     ?>
 
-    <!--This is the form where u put in the video and thumbnail and tag--><div class="main">
+    <!--This is the form where u put in the video and thumbnail and tag-->
+    <div class="main">
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
@@ -177,11 +180,13 @@
                         <form method="post" action="" enctype="multipart/form-data">
                             <div class="form-group">
 
+                                <!--Video title input-->
                                 <div class="form-group">
                                     <label for="videotitle">Video title</label>
                                     <input type="text" name="Videotitle" class="form-control" id="videotitle" aria-describedby="emailHelp" placeholder="Enter Title">
                                 </div>
 
+                                <!--Tag form-->
                                 <div class="form-group">
                                     <label for="selecttag">Select tag</label>
                                     <select id="tag" name="tag" class="form-control" id="selecttag">
@@ -198,11 +203,13 @@
                                     </select>
                                 </div>
 
+                                <!--Video file input-->
                                 <div class="form-group">
                                     <label for="videoupload">Video upload</label>
                                     <input type="file" name='file' class="form-control-file" id="videoupload">
                                 </div>
 
+                                <!--Thumbnail file input-->
                                 <div class="form-group">
                                     <label for="thumbnailupload">Thumbnail upload</label>
                                     <input type="file" name='thumb' class="form-control-file" id="thumbnailupload">
@@ -216,7 +223,8 @@
             <div class="col-sm-4"></div>
         </div>
     </div>
-
+    
+    <!--Maroon footer-->
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
 
 </body>

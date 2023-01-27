@@ -1,13 +1,16 @@
+/* Hides the scrollbar for x and y*/
 body {
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
+/* Hides the scrollbar for x and y*/
 body::-webkit-scrollbar {
   display: none;
 }
 
+/* Makes the buttons look better and fade into and our=t of*/
 .button {
   border: none;
   color: white;
@@ -28,15 +31,18 @@ body::-webkit-scrollbar {
   border: 2px solid #d3e7ff;
 }
 
+/* Makes the container change colour on hover*/
 .button1:hover {
   background-color: #d3e7ff;
   color: rgb(92, 92, 92);
 }
 
+/* Hides the form beacuse it is not meant to be seen*/
 .videoidform {
   display: none;
 }
 
+/* Limites the scroll box and lets the user scroll through it*/
 .CommentScroll {
   max-height: 300px;
   overflow-y: scroll;
@@ -50,6 +56,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* Fixes the navbar to the top odf the screen*/
 .top_navbar {
   z-index: 1;
   position: fixed;
@@ -57,15 +64,18 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
+/* Adds padding to overcome the navbar being stuck to the top*/
 .main {
   padding-top: 70px;
   padding-bottom: 70px;
 }
 
+/* Adds padding to the top of the new videos*/
 .new_videos {
   padding-top: 5px;
 }
 
+/* A style for the videos that are being reccomended*/
 .recommended_videos {
   max-height: 560px;
   overflow-y: hidden;
@@ -86,6 +96,7 @@ input.form-control {
   border: 2px solid #969696;
 }
 
+/* Makes the container change colour on hover*/
 .comment:hover {
   background-color: #edf5ff;
   color: rgb(92, 92, 92);
@@ -98,4 +109,3 @@ input.form-control {
   padding-top: 10px;
   margin: 0px;
 }
-

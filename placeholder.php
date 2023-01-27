@@ -16,11 +16,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body> 
-
+    <!--Navbar-->
     <div class="top_navbar">
         <nav class="navbar navbar-inverse" style="background-color: #002f63;">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <!--Logo in the right corner-->
                     <a href="watchvideo.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
                 </div>
 
@@ -29,6 +30,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
                                 session_start();
+                                // Checks if the user is logged in
                                 if (!isset($_SESSION['CurrentUser']))
                                 {   
                                     header("Location:user.php");
@@ -52,6 +54,7 @@
                                     </div>
                             </form>
                             </li>
+                            <!--Icons and dropdown menus-->
                             <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
                             <li><a href="likedvideos.php"> <span class='glyphicon glyphicon-thumbs-up'></span> Liked videos</a></li>
                             <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

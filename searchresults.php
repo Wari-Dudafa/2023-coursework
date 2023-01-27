@@ -16,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body> 
-
+    <!--This is the navbar-->
     <div class="top_navbar">
         <nav class="navbar navbar-inverse" style="background-color: #002f63;">
             <div class="container-fluid">
@@ -29,6 +29,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
                                 session_start();
+                                // Checks if the user is logged in
                                 if (!isset($_SESSION['CurrentUser']))
                                 {   
                                     header("Location:user.php");
@@ -65,11 +66,12 @@
     <div class="main">
         <div class="container-fluid">               
             <?php
-
+                // Defines the search value
                 $searchvalue = $_POST["search"];
                 echo "<h3> Search results for: $searchvalue</h3>";
                 include_once("connection.php");
-
+                
+                //Partial search to make sure the user can search for things even when spelled differently
                 $partialsearch = "%" . $_POST['search'] . "%";
                 $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Videotitle LIKE :search;" );
                 $stmt->bindParam(':search', $partialsearch);
@@ -77,12 +79,14 @@
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
+                    // The video details of the videos that match the search
                     $VideoID = $row['VideoID'];
                     $location = $row['Location'];
                     $location_t = $row['Location_thumbnail'];
                     $VideoTitle = $row['VideoTitle'];
                     $userid = $row['UserID'];
 
+                    // Gets the uploader
                     $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid;");
                     $stmt2->bindParam(':Userid', $userid);
                     $stmt2->execute();
@@ -90,7 +94,8 @@
                     $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
                     $uploader = $row2['Username'];
-
+                    
+                    // Dsiplays the video thumbnails
                     echo "<form action='videopage.php' method='post'>";
                     echo "<div class='videoplaybuttons'>";
                     echo "<div class='col-sm-3'>";

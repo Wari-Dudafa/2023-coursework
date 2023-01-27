@@ -58,6 +58,7 @@
 </head>
 <body> 
 
+    <!--Navbar-->
     <div class="top_navbar">
         <nav class="navbar navbar-inverse" style="background-color: #002f63;">
             <div class="container-fluid">
@@ -73,38 +74,42 @@
     <div class="col-sm-6">
         <div class="main">
             <div class="LoginFeedback">
-                <center><h3 style="color: #ff0000;"><?php
-                    session_start();
-                    //echo "" . $_SESSION["LoginFeedback"];
-                    if (!isset($_SESSION['LoginFeedback']))
-                    {   
-                        $_SESSION['LoginFeedback']="1";}
+                <center><h3 style="color: #ff0000;">
+                    <?php
+                        session_start();
+                        // User login feedback
 
-                    if ($_SESSION['LoginFeedback']=="1")
-                    {   
-                        echo "";
-                    }if ($_SESSION['LoginFeedback']=="2")
-                    {
-                        echo "Login failed, wrong username";
-                    }if ($_SESSION['LoginFeedback']=="3")
-                    {
-                        echo "Account created successfully, please login";
-                    }if ($_SESSION['LoginFeedback']=="4")
-                    {
-                        echo "Username already exists";
-                    }if ($_SESSION['LoginFeedback']=="5")
-                    {
-                        echo "Username is empty";
-                    }if ($_SESSION['LoginFeedback']=="6")
-                    {
-                        echo "Login failed, wrong password";
-                    }if ($_SESSION['LoginFeedback']=="7")
-                    {
-                        echo "Successfully logged out";
-                    }
-                ?></h3></center>
+                        if (!isset($_SESSION['LoginFeedback'])){   
+                            $_SESSION['LoginFeedback']="1";}
+                            // If the session variable is empty, set it to 1
+
+                        if ($_SESSION['LoginFeedback']=="1"){   
+                            echo "";
+                            // No feedback (Default)
+                        }if ($_SESSION['LoginFeedback']=="2"){
+                            echo "Login failed, wrong username";
+                            // Username does not exist in the databse
+                        }if ($_SESSION['LoginFeedback']=="3"){
+                            echo "Account created successfully, please login";
+                            // Account created succesfully
+                        }if ($_SESSION['LoginFeedback']=="4"){
+                            echo "Username already exists";
+                            // Username already exists so signup is voided
+                        }if ($_SESSION['LoginFeedback']=="5"){
+                            echo "Username is empty";
+                            // Username has been left blank
+                        }if ($_SESSION['LoginFeedback']=="6"){
+                            echo "Login failed, wrong password";
+                            // Password inputted in incorrect
+                        }if ($_SESSION['LoginFeedback']=="7"){
+                            echo "Successfully logged out";
+                            // Logout has been done succesfully
+                        }
+                    ?>
+                </h3></center>
             </div>
 
+            <!--Tabs that let u switch between upload and sign up-->
             <div class="tab">
                 <button class="tablinks" onclick="openCity(event, 'login')" id="defaultOpen" >Login</button>
                 <button class="tablinks" onclick="openCity(event, 'signup')">Sign up</button>
@@ -113,15 +118,18 @@
             <div id="signup" class="tabcontent">
                 <div class="well" style="background-color: aliceblue;">
                     <h2><center>Sign up</center></h2><br>
+                    <!--Sign up form-->
                     <div class="form-group">
                         <form action="adduser.php" method="post">
                             <center>      
 
+                                <!--Input username-->
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Username</label>
                                     <input type="text" name="Username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
                                 </div>
 
+                                <!--Input password-->
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
                                     <input type="password" name="Password" class="form-control" id="exampleInputPassword1" placeholder="Password">
@@ -139,15 +147,18 @@
             <div id="login" class="tabcontent">
                 <div class="well" style="background-color: aliceblue;">
                     <h2><center>Login</center></h2><br>
+                    <!--Login form-->
                     <div class="form-group">
                         <form action="loginuser.php" method="post">
                             <center>         
 
+                                <!--Input username-->
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Username</label>
                                     <input type="text" name="Username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
                                 </div>
 
+                                <!--Input password-->
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
                                     <input type="password" name="Password" class="form-control" id="exampleInputPassword1" placeholder="Password">
@@ -155,6 +166,7 @@
 
                                 <input type="submit" class="btn btn-primary btn-lg" value="Login">
 
+                                <!--Things to click at the botttom of the page-->
                                 <div class="thingsatthebottomoftheloginpage">
                                     
                                     <div class="form-group form-check">
@@ -164,42 +176,45 @@
 
                                     <a href="#" data-toggle="popover" title="" data-content="For security reasons, we dont store your password so try to rememeber it.">Forgot your password?</a><br>
                                 </div>
-
                             </center>
                         </form>
                     </div>
                 </div>
             </div>
-
         <div>
     <div>
 
     <div class="col-sm-3"></div>
 
     <script>
+        // Lets me hide the login page when signing up is on and vice versa
         document.getElementById("defaultOpen").click();
 
-        function openCity(evt, Name) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(Name).style.display = "block";
-        evt.currentTarget.className += " active";
+        function openCity(evt, Name){
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++){
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++){
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(Name).style.display = "block";
+            evt.currentTarget.className += " active";
         }
     </script>
 
     <script>
+        // The hint pop up that appears
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();   
         });
     </script>
 
+    <!--Maroon footer-->
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: #970830;">
 
 </body>

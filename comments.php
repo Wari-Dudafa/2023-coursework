@@ -30,13 +30,14 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                                 <?php
+                                    // Checking if the user is logged in
                                     session_start();
                                     if (!isset($_SESSION['CurrentUser']))
                                     {   
                                         header("Location:user.php");
                                         echo "Please login to continue<br>";
                                     }else{
-                                        //echo "Access granted<br>";
+                                        // Access granted
                                         echo "" . $_SESSION["CurrentUser"];
                                     }
                                 ?>
@@ -65,15 +66,16 @@
         </div>
     <!---->
 
-    <?php //Comment handler
+    <?php // Comment handler
         include_once("connection.php");
 
+        // Defines the variables to be posted into the databsae
         $userid = $_POST["userid"];
         $comment = $_POST["comment"];
         $videoid = $_POST["videoid"];
 
-        if (!isset($comment))
-        {   
+        if (!isset($comment)){
+            // Checks if the comment is empty or not for the sake of robustness
             header("Location:watchvideo.php");
         }
 
@@ -82,7 +84,9 @@
         $stmt->bindParam(':comment', $comment);
         $stmt->bindParam(':videoid', $videoid);
         $stmt->execute();
+        // Adds all the variables to the database
 
+        //Defines a form with the video id so when it gets sent back to the videoplayer- it will play
         echo "<form id='commentposter' action='videopage.php' method='post'>";
         echo "<input type='text' name='VideoID' value='".$videoid."'>";
         echo '</form>';

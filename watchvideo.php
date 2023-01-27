@@ -29,6 +29,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
                                 session_start();
+                                // Checks if the user is logged in
                                 if (!isset($_SESSION['CurrentUser']))
                                 {   
                                     header("Location:user.php");
@@ -52,6 +53,7 @@
                                     </div>
                             </form>
                             </li>
+                            <!--The icons in the drop down menu-->
                             <li><a href="upload.php"> <span class="glyphicon glyphicon-upload"></span> Upload</a></li>
                             <li><a href="likedvideos.php"> <span class='glyphicon glyphicon-thumbs-up'></span> Liked videos</a></li>
                             <li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -227,10 +229,12 @@
                                 array($likesofrecovideosarray[9],$recovideosarray[9]),
                             );
 
-                            function bubble_sort($arr) {
+                            function bubble_sort($arr){
+                                // Gets the length of the array
                                 $size = count($arr)-1;
-                                for ($i=0; $i<$size; $i++) {
-                                    for ($j=0; $j<$size-$i; $j++) {
+
+                                for ($i=0; $i<$size; $i++){
+                                    for ($j=0; $j<$size-$i; $j++){
                                         $k = $j+1;
                                         if ($arr[$k] < $arr[$j]) {
                                             // Swap elements at indices: $j, $k
@@ -238,8 +242,10 @@
                                         }
                                     }
                                 }
+                                // Returns the array that is sorted
                                 return $arr;
                             }
+
                             $sorted_reconvideosdata = bubble_sort($reconvideosdata);
                         //>
 

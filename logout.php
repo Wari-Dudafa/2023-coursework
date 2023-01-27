@@ -1,10 +1,12 @@
 <?php
     session_start();
-    
-    if(isset($_SESSION['CurrentUser'])){
+    $_SESSION['LoginFeedback']="7";
 
+    // If The variable is not empty then empty it 
+    if(isset($_SESSION['CurrentUser'])){
         unset($_SESSION['CurrentUser']);
     }
-    $_SESSION['LoginFeedback']="7";
+
+    // Takes user back to login page
     header("Location: user.php");
 ?>
