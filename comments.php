@@ -32,11 +32,10 @@
                                 <?php
                                     // Checking if the user is logged in
                                     session_start();
-                                    if (!isset($_SESSION['CurrentUser']))
-                                    {   
+                                    if (!isset($_SESSION['CurrentUser'])) {   
                                         header("Location:user.php");
                                         echo "Please login to continue<br>";
-                                    }else{
+                                    } else {
                                         // Access granted
                                         echo "" . $_SESSION["CurrentUser"];
                                     }
@@ -74,7 +73,7 @@
         $comment = $_POST["comment"];
         $videoid = $_POST["videoid"];
 
-        if (!isset($comment)){
+        if (!isset($comment)) {
             // Checks if the comment is empty or not for the sake of robustness
             header("Location:watchvideo.php");
         }

@@ -31,11 +31,10 @@
                             <?php
                                 session_start();
                                 // Checks if the user is logged in
-                                if (!isset($_SESSION['CurrentUser']))
-                                {   
+                                if (!isset($_SESSION['CurrentUser'])) {   
                                     header("Location:user.php");
                                     echo "Please login to continue<br>";
-                                }else{
+                                } else {
                                     //echo "Access granted<br>";
                                     echo "" . $_SESSION["CurrentUser"];
                                 }
@@ -68,7 +67,7 @@
     <?php // Video upload handler
         include_once("connection.php");             
 
-        if(isset($_POST['but_upload'])){
+        if(isset($_POST['but_upload'])) {
             $maxsize = 10048576; // Approx 10MB
 
             $name = $_FILES['file']['name'];
@@ -84,10 +83,10 @@
 
             // Checks the video extension
             // For picture uploads skip this if and go to the next
-            if (in_array($videoFileType, $extensions_arr)){
+            if (in_array($videoFileType, $extensions_arr)) {
                 
                 // Now we compare file size
-                if (($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]['size'] == 0)){
+                if (($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]['size'] == 0)) {
                     echo "<br>upload status: file too big";
                 }else{
                     // Picture upload starts here
@@ -105,10 +104,10 @@
                         $extensions_arr_t = array("png", "jpeg", "jpg");
             
                         // Checks the video extension
-                        if (in_array($videoFileType_t, $extensions_arr_t)){
+                        if (in_array($videoFileType_t, $extensions_arr_t)) {
             
                             // Now we compare file size
-                            if (($_FILES['thumb']['size'] >= $maxsize) || ($_FILES["thumb"]['size'] == 0)){
+                            if (($_FILES['thumb']['size'] >= $maxsize) || ($_FILES["thumb"]['size'] == 0)) {
                                 echo "File too large.";
                             }else{
             

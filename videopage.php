@@ -31,10 +31,10 @@
                             <?php
                                 // Checks is a user is logged in
                                 session_start();
-                                if (!isset($_SESSION['CurrentUser'])){   
+                                if (!isset($_SESSION['CurrentUser'])) {   
                                     header("Location:user.php");
                                     echo "Please login to continue<br>";
-                                }else{
+                                } else {
                                     //echo "Access granted<br>";
                                     echo "" . $_SESSION["CurrentUser"];
                                 }
@@ -73,7 +73,7 @@
                     $videoid = $_POST["VideoID"];
                     
                     //There is no video id for what ever reason
-                    if (!isset($videoid)){
+                    if (!isset($videoid)) {
                         header("Location:watchvideo.php");
                     }
                 //>
@@ -83,7 +83,7 @@
                 $stmt->bindParam(':videoid', $_POST['VideoID']);
                 $stmt->execute();
 
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                     // Gets video information
                     $location = $row['Location'];
@@ -103,7 +103,7 @@
                             $getuserid->bindParam(':Username', $_SESSION['CurrentUser']);
                             $getuserid->execute();
 
-                            while ($row = $getuserid->fetch(PDO::FETCH_ASSOC)){
+                            while ($row = $getuserid->fetch(PDO::FETCH_ASSOC)) {
                                 $currentuserid=$row["UserID"];
                             }
                         //>
@@ -119,7 +119,7 @@
                             unset($alreadyexist);
                             
                             // It does
-                            if ($count == 0){
+                            if ($count == 0) {
                                 $DefaultLikeIndicator = 3;
                                 $data = $conn->prepare("INSERT INTO  tbldata (UserID,VideoID,LikeIndicator)VALUES (:userid,:videoid,:DefaultLikeIndicator)");
                                 $data->bindParam(':userid', $currentuserid);
@@ -147,10 +147,10 @@
                         echo substr("<h1>$VideoTitle</h1>",0 ,70);
                         echo "<h3 style='font-size:20px'>$uploader</h3>";
                         //<View counter
-                            if ($views == 1){
+                            if ($views == 1) {
                                 echo "<h3 style='font-size:15px'>$views view</h3>";
                             }
-                            if ($views != 1){
+                            if ($views != 1) {
                                 echo "<h3 style='font-size:15px'>$views views</h3>";
                             }
                         //>
@@ -230,7 +230,7 @@
                             $getcomments->bindParam(':videoid', $videoid);
                             $getcomments->execute();
 
-                            while ($row5 = $getcomments->fetch(PDO::FETCH_ASSOC)){
+                            while ($row5 = $getcomments->fetch(PDO::FETCH_ASSOC)) {
                                 $comment = $row5['Comment'];
                                 $commenterid = $row5['UserID'];
 
@@ -238,7 +238,7 @@
                                 $getcommenter->bindParam(':userid', $commenterid);
                                 $getcommenter->execute();
 
-                                while ($row6 = $getcommenter->fetch(PDO::FETCH_ASSOC)){
+                                while ($row6 = $getcommenter->fetch(PDO::FETCH_ASSOC)) {
 
                                     $commenter = $row6['Username'];
 
@@ -261,7 +261,7 @@
                     $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
                     $stmt->execute();
 
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                         //SQL
                             $VideoID = $row['VideoID'];
@@ -279,7 +279,7 @@
                             $uploader = $row2['Username'];
                         //>
 
-                        if ($VideoID == $_POST['VideoID']){   
+                        if ($VideoID == $_POST['VideoID']) {   
                             // Do nothing
                         }else{
                             echo "<form action='videopage.php' method='post'>";

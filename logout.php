@@ -3,7 +3,7 @@
     $_SESSION['LoginFeedback']="7";
 
     // If The variable is not empty then empty it 
-    if(isset($_SESSION['CurrentUser'])){
+    if(isset($_SESSION['CurrentUser'])) {
         unset($_SESSION['CurrentUser']);
     }
 

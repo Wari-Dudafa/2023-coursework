@@ -11,11 +11,11 @@
 
 	// Does query have rows returned
 	$count = $blankusername->rowCount();
-	while ($row = $blankusername->fetch(PDO::FETCH_ASSOC)){
+	while ($row = $blankusername->fetch(PDO::FETCH_ASSOC)) {
 		echo($row["Username"]."<br>");
 	}
 	
-	if ($count > 0){
+	if ($count > 0) {
 		// The username already exists in the databse
 		$_SESSION['LoginFeedback']="4";
 		header('Location: user.php');
@@ -24,7 +24,7 @@
 		// The username does not exist
 		unset($blankusername);
 
-		if ($_POST["Username"]==""){
+		if ($_POST["Username"]=="") {
 			// Checks if the username is blank
 			$_SESSION['LoginFeedback']="5";
 			// Sends user back to login page

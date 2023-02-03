@@ -79,29 +79,29 @@
                         session_start();
                         // User login feedback
 
-                        if (!isset($_SESSION['LoginFeedback'])){   
+                        if (!isset($_SESSION['LoginFeedback'])) {   
                             $_SESSION['LoginFeedback']="1";}
                             // If the session variable is empty, set it to 1
 
-                        if ($_SESSION['LoginFeedback']=="1"){   
+                        if ($_SESSION['LoginFeedback']=="1") {   
                             echo "";
                             // No feedback (Default)
-                        }if ($_SESSION['LoginFeedback']=="2"){
+                        }if ($_SESSION['LoginFeedback']=="2") {
                             echo "Login failed, wrong username";
                             // Username does not exist in the databse
-                        }if ($_SESSION['LoginFeedback']=="3"){
+                        }if ($_SESSION['LoginFeedback']=="3") {
                             echo "Account created successfully, please login";
                             // Account created succesfully
-                        }if ($_SESSION['LoginFeedback']=="4"){
+                        }if ($_SESSION['LoginFeedback']=="4") {
                             echo "Username already exists";
                             // Username already exists so signup is voided
-                        }if ($_SESSION['LoginFeedback']=="5"){
+                        }if ($_SESSION['LoginFeedback']=="5") {
                             echo "Username is empty";
                             // Username has been left blank
-                        }if ($_SESSION['LoginFeedback']=="6"){
+                        }if ($_SESSION['LoginFeedback']=="6") {
                             echo "Login failed, wrong password";
                             // Password inputted in incorrect
-                        }if ($_SESSION['LoginFeedback']=="7"){
+                        }if ($_SESSION['LoginFeedback']=="7") {
                             echo "Successfully logged out";
                             // Logout has been done succesfully
                         }
@@ -190,15 +190,15 @@
         // Lets me hide the login page when signing up is on and vice versa
         document.getElementById("defaultOpen").click();
 
-        function openCity(evt, Name){
+        function openCity(evt, Name) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++){
+            for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }
 
             tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++){
+            for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
 
@@ -209,7 +209,7 @@
 
     <script>
         // The hint pop up that appears
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('[data-toggle="popover"]').popover();   
         });
     </script>

@@ -31,11 +31,10 @@
                             <?php
                                 session_start();
                                 // Checks if the user is logged in
-                                if (!isset($_SESSION['CurrentUser']))
-                                {   
+                                if (!isset($_SESSION['CurrentUser'])) {   
                                     header("Location:user.php");
                                     echo "Please login to continue<br>";
-                                }else{
+                                } else {
                                     //echo "Access granted<br>";
                                     echo "" . $_SESSION["CurrentUser"];
                                 }

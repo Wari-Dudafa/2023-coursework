@@ -30,11 +30,10 @@
                             <?php
                                 session_start();
                                 // Checks if the user is logged in
-                                if (!isset($_SESSION['CurrentUser']))
-                                {   
+                                if (!isset($_SESSION['CurrentUser'])) {   
                                     header("Location:user.php");
                                     echo "Please login to continue<br>";
-                                }else{
+                                } else {
                                     //echo "Access granted<br>";
                                     echo "" . $_SESSION["CurrentUser"];
                                 }
@@ -88,7 +87,7 @@
                         $stmt->bindParam(':Userid', $row['UserID']);
                         $stmt->execute();
 
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                             $VideoID = $row['VideoID'];
 
@@ -96,12 +95,12 @@
                             $stmt1->bindParam(':videoid', $VideoID);
                             $stmt1->execute();
 
-                            while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                            while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
 
                                 //<Gets video details
                                     $tag = $row1['Tag'];
 
-                                    if ($currentarraypointer < 10){
+                                    if ($currentarraypointer < 10) {
                                         $tagsarray[$currentarraypointer] = $tag;
                                         $currentarraypointer++;
                                     }
@@ -113,11 +112,11 @@
                     //>
 
                     //New users will have no watch history
-                    if(!isset($tagsarray[0])){
+                    if(!isset($tagsarray[0])) {
                         $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
                         $stmt->execute();
     
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     
                             //<Gets video details
                                 $VideoID = $row['VideoID'];
@@ -155,7 +154,7 @@
                     } else{
 
                         //<Array of tags in video
-                            if (!isset($populartag)){
+                            if (!isset($populartag)) {
                                 function populartag($tagsarray) {
                                     $values = array();
                                     foreach ($tagsarray as $v) {
@@ -190,11 +189,11 @@
                             $stmt->bindParam(':tag', $populartag);
                             $stmt->execute();
 
-                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                                 $VideoID = $row['VideoID'];
 
-                                if ($currentarraypointer < 10){
+                                if ($currentarraypointer < 10) {
                                     $recovideosarray[$currentarraypointer] = $VideoID;
                                     $currentarraypointer++;
                                 }
@@ -204,7 +203,7 @@
                         //>
 
                         //<Get likes and the sorting data
-                            while($currentarraypointer < 10){
+                            while($currentarraypointer < 10) {
                                 $likes = $conn->prepare("SELECT * FROM TblData WHERE LikeIndicator = 1 AND VideoID = :videoid;)");
                                 $likes->bindParam(':videoid', $recovideosarray[$currentarraypointer]);
                                 $likes->execute();
@@ -217,6 +216,7 @@
                         
 
                             $reconvideosdata = array(
+                                // Array of videos to be reccomended and their like counter
                                 array($likesofrecovideosarray[0],$recovideosarray[0]),
                                 array($likesofrecovideosarray[1],$recovideosarray[1]),
                                 array($likesofrecovideosarray[2],$recovideosarray[2]),
@@ -229,12 +229,13 @@
                                 array($likesofrecovideosarray[9],$recovideosarray[9]),
                             );
 
-                            function bubble_sort($arr){
+                            // A funtion to perform the bubble sort algorithm on the array
+                            function bubble_sort($arr) {
                                 // Gets the length of the array
                                 $size = count($arr)-1;
 
-                                for ($i=0; $i<$size; $i++){
-                                    for ($j=0; $j<$size-$i; $j++){
+                                for ($i=0; $i<$size; $i++) {
+                                    for ($j=0; $j<$size-$i; $j++) {
                                         $k = $j+1;
                                         if ($arr[$k] < $arr[$j]) {
                                             // Swap elements at indices: $j, $k
@@ -251,7 +252,7 @@
 
                         //<Display videos
                             
-                            while ($currentarraypointer < 7){
+                            while ($currentarraypointer < 7) {
                                 $j = 9 - $currentarraypointer;
                                 $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid ;");
                                 $stmt->bindParam(':videoid', $sorted_reconvideosdata[$j][1]);
@@ -305,7 +306,7 @@
                     $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
                     $stmt->execute();
 
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                         //<Gets video details
                             $VideoID = $row['VideoID'];

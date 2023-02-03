@@ -30,11 +30,10 @@
                             <?php
                                 session_start();
                                 // Checks if the user is logged in
-                                if (!isset($_SESSION['CurrentUser']))
-                                {   
+                                if (!isset($_SESSION['CurrentUser'])) {   
                                     header("Location:user.php");
                                     echo "Please login to continue<br>";
-                                }else{
+                                } else {
                                     //echo "Access granted<br>";
                                     echo "" . $_SESSION["CurrentUser"];
                                 }
@@ -77,7 +76,7 @@
                 $stmt->bindParam(':search', $partialsearch);
                 $stmt->execute();
 
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                     // The video details of the videos that match the search
                     $VideoID = $row['VideoID'];

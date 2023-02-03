@@ -30,11 +30,10 @@
                             <?php
                                 // Checking if the user is logged in
                                 session_start();
-                                if (!isset($_SESSION['CurrentUser']))
-                                {   
+                                if (!isset($_SESSION['CurrentUser'])) {   
                                     header("Location:user.php");
                                     echo "Please login to continue<br>";
-                                }else{
+                                } else {
                                     //echo "Access granted<br>";
                                     echo "" . $_SESSION["CurrentUser"];
                                 }
@@ -74,7 +73,7 @@
                 $stmt->bindParam(':username', $_SESSION["CurrentUser"]);
                 $stmt->execute();
 
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                     $userid = $row['UserID'];
                     $stmt1 = $conn->prepare("SELECT * FROM tbldata WHERE UserId =:userid AND LikeIndicator = :likeindicator;" );
@@ -82,14 +81,14 @@
                     $stmt1->bindParam(':likeindicator', $likeindicator);
                     $stmt1->execute();
 
-                    while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)){
+                    while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
 
                         $_VideoID = $row1['VideoID'];
                         $stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;" );
                         $stmt2->bindParam(':videoid', $_VideoID);
                         $stmt2->execute();
 
-                        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)){
+                        while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
                             $VideoID = $row2['VideoID'];
                             $location = $row2['Location'];
                             $location_t = $row2['Location_thumbnail'];
