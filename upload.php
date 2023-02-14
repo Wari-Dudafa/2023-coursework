@@ -181,7 +181,7 @@
 
                                 <!--Video title input-->
                                 <div class="form-group">
-                                    <label for="videotitle">Video title</label>
+                                    <label for="videotitle">Video title*</label>
                                     <input type="text" name="Videotitle" class="form-control" id="videotitle" aria-describedby="emailHelp" placeholder="Enter Title">
                                 </div>
 
@@ -204,13 +204,13 @@
 
                                 <!--Video file input-->
                                 <div class="form-group">
-                                    <label for="videoupload">Video upload</label>
+                                    <label for="videoupload">Video upload*</label>
                                     <input type="file" name='file' class="form-control-file" id="videoupload">
                                 </div>
 
                                 <!--Thumbnail file input-->
                                 <div class="form-group">
-                                    <label for="thumbnailupload">Thumbnail upload</label>
+                                    <label for="thumbnailupload">Thumbnail upload*</label>
                                     <input type="file" name='thumb' class="form-control-file" id="thumbnailupload">
                                 </div>
 
