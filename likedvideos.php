@@ -64,17 +64,21 @@
 
     <div class="main">
         <div class="container-fluid">         
-            <h2>Your liked videos:</h2>                   
+            <h2>Your liked videos:</h2>      
+
             <?php
                 include_once("connection.php");
+                // The status of all liked videos
                 $likeindicator = 1;
 
+                // Select the user id
                 $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username=:username;" );
                 $stmt->bindParam(':username', $_SESSION["CurrentUser"]);
                 $stmt->execute();
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
+                    // Select videos id that are liked by the user
                     $userid = $row['UserID'];
                     $stmt1 = $conn->prepare("SELECT * FROM tbldata WHERE UserId =:userid AND LikeIndicator = :likeindicator;" );
                     $stmt1->bindParam(':userid', $userid);
@@ -83,12 +87,14 @@
 
                     while ($row1 = $stmt1->fetch(PDO::FETCH_ASSOC)) {
 
+                        // Select the relevant data for the video based of the id gottem in the last step
                         $_VideoID = $row1['VideoID'];
                         $stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;" );
                         $stmt2->bindParam(':videoid', $_VideoID);
                         $stmt2->execute();
 
                         while ($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                            // Gets all the relevant data like thumbnaisl
                             $VideoID = $row2['VideoID'];
                             $location = $row2['Location'];
                             $location_t = $row2['Location_thumbnail'];
@@ -99,10 +105,12 @@
                             $stmt3->bindParam(':Userid', $userid);
                             $stmt3->execute();
 
+                            // Gets uploader
                             $row4 = $stmt3->fetch(PDO::FETCH_ASSOC);
 
                             $uploader = $row4['Username'];
 
+                            // Display the video
                             echo "<form action='videopage.php' method='post'>";
                             echo "<div class='videoplaybuttons'>";
                             echo "<div class='col-sm-3'>";
