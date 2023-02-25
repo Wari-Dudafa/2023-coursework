@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +34,6 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                                 <?php
                                     // Checking if the user is logged in
-                                    session_start();
                                     if (!isset($_SESSION['CurrentUser'])) {   
                                         header("Location:user.php");
                                         echo "Please login to continue<br>";

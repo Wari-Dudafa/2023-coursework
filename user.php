@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,7 +79,6 @@
             <div class="LoginFeedback">
                 <center><h3 style="color: #ff0000;">
                     <?php
-                        session_start();
                         // User login feedback
 
                         if (!isset($_SESSION['LoginFeedback'])) {   
