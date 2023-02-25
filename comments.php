@@ -1,5 +1,10 @@
 <?php
     session_start();
+    // Checks is a user is logged in
+    if (!isset($_SESSION['CurrentUser'])) {   
+        header("Location:user.php");
+        echo "Please login to continue<br>";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,14 +38,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                                 <?php
-                                    // Checking if the user is logged in
-                                    if (!isset($_SESSION['CurrentUser'])) {   
-                                        header("Location:user.php");
-                                        echo "Please login to continue<br>";
-                                    } else {
-                                        // Access granted
-                                        echo "" . $_SESSION["CurrentUser"];
-                                    }
+                                    echo "" . $_SESSION["CurrentUser"];  
                                 ?>
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
