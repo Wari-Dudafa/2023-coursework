@@ -1,11 +1,3 @@
-<?php
-    session_start();
-    // Checks is a user is logged in
-    if (!isset($_SESSION['CurrentUser'])) {   
-        header("Location:user.php");
-        echo "Please login to continue<br>";
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,14 +21,22 @@
         <nav class="navbar navbar-inverse" style="background-color: #002f63;">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a href="watchvideo.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
+                    <a href="homepage.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>
                             <?php
-                                echo "" . $_SESSION["CurrentUser"]; 
+                                session_start();
+                                // Checks if the user is logged in
+                                if (!isset($_SESSION['CurrentUser'])) {   
+                                    header("Location:user.php");
+                                    echo "Please login to continue<br>";
+                                } else {
+                                    //echo "Access granted<br>";
+                                    echo "" . $_SESSION["CurrentUser"];
+                                }
                             ?>
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -72,7 +72,7 @@
                 
                 //Partial search to make sure the user can search for things even when spelled differently
                 $partialsearch = "%" . $_POST['search'] . "%";
-                $stmt = $conn->prepare("SELECT * FROM TblVideos WHERE Videotitle LIKE :search;" );
+                $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Videotitle LIKE :search;" );
                 $stmt->bindParam(':search', $partialsearch);
                 $stmt->execute();
 
@@ -86,13 +86,13 @@
                     $userid = $row['UserID'];
 
                     // Gets the uploader
-                    $stmt2 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:Userid;");
+                    $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid;");
                     $stmt2->bindParam(':Userid', $userid);
                     $stmt2->execute();
 
                     $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-                    $uploader = $row2['Username'];
+                    $uploader = $row2['Username'] ?? 'uploader';
                     
                     // Dsiplays the video thumbnails
                     echo "<form action='videopage.php' method='post'>";

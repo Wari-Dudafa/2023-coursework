@@ -78,7 +78,7 @@
                             // Gets uploader
                             $row4 = $stmt3->fetch(PDO::FETCH_ASSOC);
 
-                            $uploader = $row4['Username'];
+                            $uploader = $row4['Username'] ?? 'uploader';
 
                             // Display the video
                             echo "<form action='videopage.php' method='post'>";

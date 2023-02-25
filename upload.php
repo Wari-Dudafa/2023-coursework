@@ -35,8 +35,8 @@
     <!--This is the form where u put in the video and thumbnail and tag-->
     <div class="main">
         <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
                 <div class="well" style="background-color: #d3e7ff;">
                     <div class="well" style="background-color: #b3d5ff;">
                         <h1><center>Upload</center></h1>
@@ -73,7 +73,7 @@
                                     <input type="file" name='file' class="form-control-file" id="videoupload">
                                     <br>
                                     <P>Accepted file tpes are: "mp4", "mov", "mpeg" and "mkv"</P>
-                                    <P>Files must bebelow: 10Mb</P>
+                                    <P>Files must be below: 10Mb</P>
                                 </div>
 
                                 <!--Thumbnail file input-->
@@ -87,7 +87,7 @@
                         </form>
                 </div>
             </div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-3"></div>
         </div>
     </div>
     

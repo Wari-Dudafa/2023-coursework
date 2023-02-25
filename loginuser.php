@@ -14,7 +14,7 @@
         // Password verification that compares a hash of the password to what is stored in the database
         if(password_verify($_POST["Password"], $row['Password'])) {
             $_SESSION['CurrentUser']=$row["Username"];
-            header('Location: watchvideo.php');
+            header('Location: homepage.php');
             // Success
         } else {
             $_SESSION['LoginFeedback']="6";

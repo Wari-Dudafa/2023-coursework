@@ -5,7 +5,7 @@
             <nav class="navbar navbar-inverse" style="background-color: #002f63;">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a href="watchvideo.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
+                        <a href="homepage.php"><img src="BranchLogo.png" alt="icon" width="45" height="45"></a> 
                     </div>
 
                     <ul class="nav navbar-nav navbar-right">

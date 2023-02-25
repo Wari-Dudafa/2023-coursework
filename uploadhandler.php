@@ -2,7 +2,7 @@
     include_once("connection.php");             
 
     if(isset($_POST['but_upload'])) {
-        $maxsize = 10000000; // Approx 10MB
+        $maxsize = 13000000; // Approx 10MB
 
         $name = $_FILES['file']['name'];
         $traget_dir = "TblVideos/";// Target folder files will be uploaded to
@@ -59,8 +59,7 @@
                                         $stmt1->bindParam(':Username', $_SESSION['CurrentUser']);
                                         $stmt1->execute();
 
-                                        while ($row = $stmt1->fetch(PDO::FETCH_ASSOC))
-                                        {
+                                        while ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
                                             $userid=$row["UserID"];
                                         }
                                     //>
@@ -69,8 +68,7 @@
                                         $stmt2 = $conn->prepare("SELECT MAX(VideoID) FROM TblVideos;");
                                         $stmt2->execute();
 
-                                        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
-                                        {
+                                        while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
                                             $videoid=$row["MAX(VideoID)"];
                                             //echo " VideoID: '".$videoid."'";
                                         }
@@ -85,9 +83,9 @@
                                         $conn=null;
                                     //>
                                 //>
-                                echo "<br>UploadStatus: complete";
-                                //Head to a new page after your upload has completed
-                                header('Location: watchvideo.php');                                                
+                                //echo "<br>UploadStatus: complete";
+                                // Head to a new page after your upload has completed
+                                header('Location: homepage.php');                                                
                             }
                         }
                     }

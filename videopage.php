@@ -42,7 +42,7 @@
                     
                     //There is no video id for what ever reason
                     if (!isset($videoid)) {
-                        header("Location:watchvideo.php");
+                        header("Location:homepage.php");
                     }
                 //>
 
@@ -63,7 +63,7 @@
                     $getusername->bindParam(':Userid', $userid);
                     $getusername->execute();
                     $row2 = $getusername->fetch(PDO::FETCH_ASSOC);
-                    $uploader = $row2['Username'];
+                    $uploader = $row2['Username'] ?? 'uploader';
 
                     //<insert user and video id into the data table
                         //< Get user id
@@ -244,7 +244,7 @@
 
                             $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-                            $uploader = $row2['Username'];
+                            $uploader = $row2['Username'] ?? 'uploader';
                         //>
 
                         if ($VideoID == $_POST['VideoID']) {   

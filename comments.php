@@ -43,7 +43,7 @@
 
         if (!isset($comment)) {
             // Checks if the comment is empty or not for the sake of robustness
-            header("Location:watchvideo.php");
+            header("Location:homepage.php");
         }
 
         $stmt = $conn->prepare("INSERT INTO TblComments (UserID,VIdeoID,Comment)VALUES (:userid,:videoid,:comment)");
