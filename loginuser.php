@@ -4,7 +4,7 @@
     array_map("htmlspecialchars", $_POST);
 
     // Selects the point in the databse where the username inputted is in the database
-    $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;" );
+    $stmt = $conn->prepare("SELECT * FROM TblUsers WHERE Username =:Username ;" );
     $stmt->bindParam(':Username', $_POST['Username']);
     $stmt->execute();
 
@@ -18,7 +18,6 @@
             // Success
         } else {
             $_SESSION['LoginFeedback']="6";
-            header('Location: user.php');
             // Fail
         }
     }

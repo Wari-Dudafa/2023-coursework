@@ -1,4 +1,5 @@
 <?php
+	header('Location: user.php');
 	session_start();
 	$_SESSION['LoginFeedback']="3";
 	include_once("connection.php");
@@ -18,7 +19,6 @@
 	if ($count > 0) {
 		// The username already exists in the databse
 		$_SESSION['LoginFeedback']="4";
-		header('Location: user.php');
 	}
 	else{
 		// The username does not exist
@@ -27,8 +27,6 @@
 		if ($_POST["Username"]=="") {
 			// Checks if the username is blank
 			$_SESSION['LoginFeedback']="5";
-			// Sends user back to login page
-			header('Location: user.php');
 		}else{
 			// Adds the username and hashed password to the databse
 			$hashed_password = password_hash($_POST["Password"], PASSWORD_DEFAULT);
@@ -37,8 +35,6 @@
 			$stmt->bindParam(':Password', $hashed_password);
 			$stmt->execute();
 			$conn=null;
-			// Sends user back to login page
-			header('Location: user.php');
 		}
 	}
 ?>

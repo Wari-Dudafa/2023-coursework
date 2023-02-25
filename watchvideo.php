@@ -47,12 +47,12 @@
                     $currentarraypointer = 0;
 
                     //<Getting tag data
-                        $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username =:username;");
+                        $stmt = $conn->prepare("SELECT * FROM TblUsers WHERE Username =:username;");
                         $stmt->bindParam(':username', $_SESSION['CurrentUser']);
                         $stmt->execute();
                         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                        $stmt = $conn->prepare("SELECT * FROM tbldata WHERE UserID =:Userid ;");
+                        $stmt = $conn->prepare("SELECT * FROM TblData WHERE UserID =:Userid ;");
                         $stmt->bindParam(':Userid', $row['UserID']);
                         $stmt->execute();
 
@@ -60,7 +60,7 @@
 
                             $VideoID = $row['VideoID'];
 
-                            $stmt1 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;");
+                            $stmt1 = $conn->prepare("SELECT * FROM TblVideos WHERE VideoID =:videoid;");
                             $stmt1->bindParam(':videoid', $VideoID);
                             $stmt1->execute();
 
@@ -82,7 +82,7 @@
 
                     //New users will have no watch history
                     if(!isset($tagsarray[0])) {
-                        $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
+                        $stmt = $conn->prepare("SELECT * FROM TblVideos ORDER BY videoid DESC");
                         $stmt->execute();
     
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -96,7 +96,7 @@
                             //>
     
                             //<Gets the uploader
-                                $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                                $stmt2 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:Userid ;");
                                 $stmt2->bindParam(':Userid', $userid);
                                 $stmt2->execute();
                                 $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
@@ -154,7 +154,7 @@
                         //>
 
                         //<Get most watched tag
-                            $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Tag =:tag ;");
+                            $stmt = $conn->prepare("SELECT * FROM TblVideos WHERE Tag =:tag ;");
                             $stmt->bindParam(':tag', $populartag);
                             $stmt->execute();
 
@@ -223,7 +223,7 @@
                             
                             while ($currentarraypointer < 7) {
                                 $j = 9 - $currentarraypointer;
-                                $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid ;");
+                                $stmt = $conn->prepare("SELECT * FROM TblVideos WHERE VideoID =:videoid ;");
                                 $stmt->bindParam(':videoid', $sorted_reconvideosdata[$j][1]);
                                 $stmt->execute();
 
@@ -237,7 +237,7 @@
                                 //>
 
                                 //<Gets the uploader
-                                    $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:userid ;");
+                                    $stmt2 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:userid ;");
                                     $stmt2->bindParam(':userid', $userid);
                                     $stmt2->execute();
                                     $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
@@ -272,7 +272,7 @@
                 //<New videos
                     echo "<div class='new_videos'>";
                     echo "<h3> New videos:</h3>";
-                    $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
+                    $stmt = $conn->prepare("SELECT * FROM TblVideos ORDER BY videoid DESC");
                     $stmt->execute();
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -286,7 +286,7 @@
                         //>
 
                         //<Gets the uploader
-                            $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                            $stmt2 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:Userid ;");
                             $stmt2->bindParam(':Userid', $userid);
                             $stmt2->execute();
                             $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
