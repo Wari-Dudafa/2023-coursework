@@ -77,7 +77,7 @@
     <div class="col-sm-6">
         <div class="main">
             <div class="LoginFeedback">
-                <center><h3 style="color: #ff0000;">
+                <center>
                     <?php
                         // User login feedback
 
@@ -89,22 +89,22 @@
                             echo "";
                             // No feedback (Default)
                         }if ($_SESSION['LoginFeedback']=="2") {
-                            echo "Login failed, wrong username";
+                            echo "<h3 style='color: #ff2626;'> Login failed, wrong username";
                             // Username does not exist in the databse
                         }if ($_SESSION['LoginFeedback']=="3") {
-                            echo "Account created successfully, please login";
+                            echo "<h3 style='color: #149e08;'> Account created successfully, please login";
                             // Account created succesfully
                         }if ($_SESSION['LoginFeedback']=="4") {
-                            echo "Username already exists";
+                            echo "<h3 style='color: #ff2626;'> Username already exists";
                             // Username already exists so signup is voided
                         }if ($_SESSION['LoginFeedback']=="5") {
-                            echo "Username is empty";
+                            echo "<h3 style='color: #ff2626;'> Username is empty";
                             // Username has been left blank
                         }if ($_SESSION['LoginFeedback']=="6") {
-                            echo "Login failed, wrong password";
+                            echo "<h3 style='color: #ff2626;'> Login failed, wrong password";
                             // Password inputted in incorrect
                         }if ($_SESSION['LoginFeedback']=="7") {
-                            echo "Successfully logged out";
+                            echo "<h3 style='color: #149e08;'> Successfully logged out";
                             // Logout has been done succesfully
                         }
                     ?>
