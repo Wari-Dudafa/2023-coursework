@@ -135,7 +135,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
                                     <input type="password" name="Password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                    <small id="emailHelp" class="form-text text-muted">Try to remeber your username and password</small>
+                                    <small id="emailHelp" class="form-text text-muted">Try to remember your username and password</small>
                                 </div>
 
                                 <input type="submit" class="btn btn-primary btn-lg" value="Sign up">
