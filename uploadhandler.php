@@ -85,7 +85,7 @@
                                         $conn=null;
                                     //>
                                 //>
-                                echo "<br>upload status: complete";
+                                //echo "<br>upload status: complete";
                                 //Head to a new page after your upload has completed
                                 header('Location: watchvideo.php');                                                
                             }
