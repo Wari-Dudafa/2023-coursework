@@ -71,6 +71,9 @@
                                 <div class="form-group">
                                     <label for="videoupload">Video upload*</label>
                                     <input type="file" name='file' class="form-control-file" id="videoupload">
+                                    <br>
+                                    <P>Accepted file tpes are: "mp4", "mov", "mpeg" and "mkv"</P>
+                                    <P>Files must bebelow: 10Mb</P>
                                 </div>
 
                                 <!--Thumbnail file input-->

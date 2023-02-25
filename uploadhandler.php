@@ -2,7 +2,7 @@
     include_once("connection.php");             
 
     if(isset($_POST['but_upload'])) {
-        $maxsize = 10048576; // Approx 10MB
+        $maxsize = 10000000; // Approx 10MB
 
         $name = $_FILES['file']['name'];
         $traget_dir = "TblVideos/";// Target folder files will be uploaded to
@@ -13,7 +13,7 @@
         $videoFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
         // Acceptable extensions
-        $extensions_arr = array("mp4", "mov", "mpeg");// accepted file types
+        $extensions_arr = array("mp4", "mov", "mpeg", "mkv");// accepted file types
 
         // Checks the video extension
         // For picture uploads skip this if and go to the next
@@ -21,7 +21,7 @@
             
             // Now we compare file size
             if (($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]['size'] == 0)) {
-                echo "<br>upload status: file too big";
+                echo "<br>UploadStatus: Video file is too big";
             }else{
                 // Picture upload starts here
                 // Thumnbnail upload handler
@@ -42,7 +42,7 @@
         
                         // Now we compare file size
                         if (($_FILES['thumb']['size'] >= $maxsize) || ($_FILES["thumb"]['size'] == 0)) {
-                            echo "File too large.";
+                            echo "<br>UploadStatus: Thumbnail file is too big";
                         }else{
         
                             // Starts uploading
@@ -85,7 +85,7 @@
                                         $conn=null;
                                     //>
                                 //>
-                                //echo "<br>upload status: complete";
+                                echo "<br>UploadStatus: complete";
                                 //Head to a new page after your upload has completed
                                 header('Location: watchvideo.php');                                                
                             }
@@ -93,10 +93,11 @@
                     }
                 }
             }
+        } else {
+            echo "<br>UploadStatus: Video file format is incorrect";
         }
-    }
-    else{
+    } else {
         //If upload fails- this happend
-        echo "<br>upload status: file error";
+        echo "<br>UploadStatus: Video file doesnt exist";
     }
 ?>
