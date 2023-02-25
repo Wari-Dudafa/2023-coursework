@@ -39,7 +39,7 @@
             $maxsize = 10048576; // Approx 10MB
 
             $name = $_FILES['file']['name'];
-            $traget_dir = "tblvideos/";// Target folder files will be uploaded to
+            $traget_dir = "TblVideos/";// Target folder files will be uploaded to
             $target_file = $traget_dir . $_FILES["file"]["name"];// Name of file from the form
             $tag = $_POST["tag"];// Video tag
 
@@ -62,7 +62,7 @@
                     if (move_uploaded_file($_FILES['file']['tmp_name'],$target_file)) {
 
                         $name_t = $_FILES['thumb']['name'];
-                        $traget_dir_t = "tblvideos/";
+                        $traget_dir_t = "TblVideos/";
                         $target_file_t = $traget_dir_t . $_FILES["thumb"]["name"];
             
                         // File type
@@ -89,7 +89,7 @@
 
                                     //<Uploaded by segment
                                         //<Gets user id
-                                            $stmt1 = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username ;");
+                                            $stmt1 = $conn->prepare("SELECT * FROM TblUsers WHERE Username =:Username ;");
                                             $stmt1->bindParam(':Username', $_SESSION['CurrentUser']);
                                             $stmt1->execute();
 
@@ -100,7 +100,7 @@
                                         //>
                                         
                                         //<Gets video id
-                                            $stmt2 = $conn->prepare("SELECT MAX(VideoID) FROM tblvideos;");
+                                            $stmt2 = $conn->prepare("SELECT MAX(VideoID) FROM TblVideos;");
                                             $stmt2->execute();
 
                                             while ($row = $stmt2->fetch(PDO::FETCH_ASSOC))
@@ -111,7 +111,7 @@
                                             
                                         //>
 
-                                        //<Puts user id's into tblusersvideos
+                                        //<Puts user id's into TblUsersvideos
                                             $stmt_ = $conn->prepare("UPDATE TblVideos SET UserID = :userid WHERE VideoID = :videoid");
                                             $stmt_->bindParam(':userid', $userid);
                                             $stmt_->bindParam(':videoid', $videoid);

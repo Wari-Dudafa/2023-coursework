@@ -42,7 +42,7 @@
                 $likeindicator = 1;
 
                 // Select the user id
-                $stmt = $conn->prepare("SELECT * FROM tblusers WHERE Username=:username;" );
+                $stmt = $conn->prepare("SELECT * FROM TblUsers WHERE Username=:username;" );
                 $stmt->bindParam(':username', $_SESSION["CurrentUser"]);
                 $stmt->execute();
 
@@ -50,7 +50,7 @@
 
                     // Select videos id that are liked by the user
                     $userid = $row['UserID'];
-                    $stmt1 = $conn->prepare("SELECT * FROM tbldata WHERE UserId =:userid AND LikeIndicator = :likeindicator;" );
+                    $stmt1 = $conn->prepare("SELECT * FROM TblData WHERE UserId =:userid AND LikeIndicator = :likeindicator;" );
                     $stmt1->bindParam(':userid', $userid);
                     $stmt1->bindParam(':likeindicator', $likeindicator);
                     $stmt1->execute();
@@ -59,7 +59,7 @@
 
                         // Select the relevant data for the video based of the id gottem in the last step
                         $_VideoID = $row1['VideoID'];
-                        $stmt2 = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID =:videoid;" );
+                        $stmt2 = $conn->prepare("SELECT * FROM TblVideos WHERE VideoID =:videoid;" );
                         $stmt2->bindParam(':videoid', $_VideoID);
                         $stmt2->execute();
 
@@ -71,7 +71,7 @@
                             $VideoTitle = $row2['VideoTitle'];
                             $userid = $row2['UserID'];
 
-                            $stmt3 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid;");
+                            $stmt3 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:Userid;");
                             $stmt3->bindParam(':Userid', $userid);
                             $stmt3->execute();
 

@@ -72,7 +72,7 @@
                 
                 //Partial search to make sure the user can search for things even when spelled differently
                 $partialsearch = "%" . $_POST['search'] . "%";
-                $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE Videotitle LIKE :search;" );
+                $stmt = $conn->prepare("SELECT * FROM TblVideos WHERE Videotitle LIKE :search;" );
                 $stmt->bindParam(':search', $partialsearch);
                 $stmt->execute();
 
@@ -86,7 +86,7 @@
                     $userid = $row['UserID'];
 
                     // Gets the uploader
-                    $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid;");
+                    $stmt2 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:Userid;");
                     $stmt2->bindParam(':Userid', $userid);
                     $stmt2->execute();
 

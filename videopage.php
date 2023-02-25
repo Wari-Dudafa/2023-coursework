@@ -47,7 +47,7 @@
                 //>
 
                 // Gets videos that have been liked by the user
-                $stmt = $conn->prepare("SELECT * FROM tblvideos WHERE VideoID LIKE :videoid ;" );
+                $stmt = $conn->prepare("SELECT * FROM TblVideos WHERE VideoID LIKE :videoid ;" );
                 $stmt->bindParam(':videoid', $_POST['VideoID']);
                 $stmt->execute();
 
@@ -59,7 +59,7 @@
                     $VideoTitle = $row['VideoTitle'];
                     $userid = $row['UserID'];
 
-                    $getusername = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                    $getusername = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:Userid ;");
                     $getusername->bindParam(':Userid', $userid);
                     $getusername->execute();
                     $row2 = $getusername->fetch(PDO::FETCH_ASSOC);
@@ -67,7 +67,7 @@
 
                     //<insert user and video id into the data table
                         //< Get user id
-                            $getuserid = $conn->prepare("SELECT * FROM tblusers WHERE Username =:Username;");
+                            $getuserid = $conn->prepare("SELECT * FROM TblUsers WHERE Username =:Username;");
                             $getuserid->bindParam(':Username', $_SESSION['CurrentUser']);
                             $getuserid->execute();
 
@@ -89,7 +89,7 @@
                             // It does
                             if ($count == 0) {
                                 $DefaultLikeIndicator = 3;
-                                $data = $conn->prepare("INSERT INTO  tbldata (UserID,VideoID,LikeIndicator)VALUES (:userid,:videoid,:DefaultLikeIndicator)");
+                                $data = $conn->prepare("INSERT INTO  TblData (UserID,VideoID,LikeIndicator)VALUES (:userid,:videoid,:DefaultLikeIndicator)");
                                 $data->bindParam(':userid', $currentuserid);
                                 $data->bindParam(':videoid', $_POST['VideoID']);
                                 $data->bindParam(':DefaultLikeIndicator', $DefaultLikeIndicator);
@@ -194,7 +194,7 @@
                             echo "<div class='well' style='background-color: #b3d5ff;'>";
                             echo "<div class='CommentScroll';'>";
                             
-                            $getcomments = $conn->prepare("SELECT * FROM tblcomments WHERE VideoID = :videoid ;");
+                            $getcomments = $conn->prepare("SELECT * FROM TblComments WHERE VideoID = :videoid ;");
                             $getcomments->bindParam(':videoid', $videoid);
                             $getcomments->execute();
 
@@ -202,7 +202,7 @@
                                 $comment = $row5['Comment'];
                                 $commenterid = $row5['UserID'];
 
-                                $getcommenter = $conn->prepare("SELECT * FROM tblusers WHERE UserID = :userid ;");
+                                $getcommenter = $conn->prepare("SELECT * FROM TblUsers WHERE UserID = :userid ;");
                                 $getcommenter->bindParam(':userid', $commenterid);
                                 $getcommenter->execute();
 
@@ -226,7 +226,7 @@
                 }
                 //<Other displayed videos
                     include_once("connection.php");
-                    $stmt = $conn->prepare("SELECT * FROM tblvideos ORDER BY videoid DESC");
+                    $stmt = $conn->prepare("SELECT * FROM TblVideos ORDER BY videoid DESC");
                     $stmt->execute();
 
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -238,7 +238,7 @@
                             $VideoTitle = $row['VideoTitle'];
                             $userid = $row['UserID'];
 
-                            $stmt2 = $conn->prepare("SELECT * FROM tblusers WHERE UserID =:Userid ;");
+                            $stmt2 = $conn->prepare("SELECT * FROM TblUsers WHERE UserID =:Userid ;");
                             $stmt2->bindParam(':Userid', $userid);
                             $stmt2->execute();
 
