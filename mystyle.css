@@ -1,7 +1,6 @@
 /* Hides the scrollbar for x and y*/
 body {
   overflow-x: hidden;
-  overflow-y: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
   font-family: Arial;
