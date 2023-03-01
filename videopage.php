@@ -61,7 +61,7 @@
     <div class="main">
         <div class="container-fluid">                 
             <?php
-                $getusername = $conn->prepare("SELECT * FROM tblusers WHERE UserID = :Userid ;");
+                $getusername = $conn->prepare("SELECT * FROM TblUsers WHERE UserID = :Userid ;");
                 $getusername->bindParam(':Userid', $userid);
                 $getusername->execute();
                 
@@ -153,7 +153,7 @@
 
                         //< Likes
                             echo "<div class='col-sm-1'>";
-                            echo "<form action='likeindicator.php' method='post'>";
+                            echo "<form action='likeindicator.php' method='get'>";
                             echo "<div class='videoidform'>";
                             echo "<input type='text' name='videoid' value='".$videoid."'>";
                             echo "<input type='text' name='userid' value='".$currentuserid."'>";
@@ -166,7 +166,7 @@
 
                         //< Dislikes
                             echo "<div class='col-sm-2'>";
-                            echo "<form action='likeindicator.php' method='post'>";
+                            echo "<form action='likeindicator.php' method='get'>";
                             echo "<div class='videoidform'>";
                             echo "<input type='text' name='videoid' value='".$videoid."'>";
                             echo "<input type='text' name='userid' value='".$currentuserid."'>";

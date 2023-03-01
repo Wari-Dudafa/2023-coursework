@@ -38,9 +38,9 @@
             include_once("connection.php");
 
             // Defines variables to add to the database
-            $userid = $_POST["userid"];
-            $likeindicator = $_POST["likeindicator"];
-            $videoid = $_POST["videoid"];
+            $userid = $_GET["userid"];
+            $likeindicator = $_GET["likeindicator"];
+            $videoid = $_GET["videoid"];
 
             // Let's me test that all the recieved data is correct
             echo "UserID: $userid <br>";
@@ -48,7 +48,7 @@
             echo "VideoID: $videoid <br>";
 
             // Creates a form so a redirect back to the video player will play the correct video
-            echo "<form id='likeindicatorposter' action='videopage.php' method='post'>";
+            echo "<form id='likeindicatorposter' action='videopage.php' method='get'>";
             echo "<input type='text' name='VideoID' value='".$videoid."'>";
             echo '</form>';
 
