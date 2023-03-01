@@ -3,7 +3,7 @@
     include_once("connection.php");          
 
     if(isset($_POST['but_upload'])) {
-        $maxsize = 13000000; // Approx 10MB
+        $maxsize = 62993998; // Approx 60MB
 
         $name = $_FILES['file']['name'];
         $traget_dir = "TblVideos/";// Target folder files will be uploaded to
