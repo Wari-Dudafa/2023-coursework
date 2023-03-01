@@ -111,7 +111,7 @@
                             //>
     
                             //<Displayer
-                                echo "<form action='videopage.php' method='post'>";
+                                echo "<form action='videopage.php' method='get'>";
                                 echo "<div class='videoplaybuttons'>";
                                 echo "<div class='col-sm-3'>";
                                 echo "<button class='button button1'>";
@@ -252,7 +252,7 @@
                                 //>
 
                                 //<Displayer
-                                    echo "<form action='videopage.php' method='post'>";
+                                    echo "<form action='videopage.php' method='get'>";
                                     echo "<div class='videoplaybuttons'>";
                                     echo "<div class='col-sm-3'>";
                                     echo "<button class='button button1'>";
@@ -303,7 +303,7 @@
                         //>
 
                         //<Displayer
-                            echo "<form action='videopage.php' method='post'>";
+                            echo "<form action='videopage.php' method='get'>";
                             echo "<div class='videoplaybuttons'>";
                             echo "<div class='col-sm-3'>";
                             echo "<button class='button button1'>";

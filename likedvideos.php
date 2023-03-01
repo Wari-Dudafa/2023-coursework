@@ -81,7 +81,7 @@
                             $uploader = $row4['Username'] ?? 'uploader';
 
                             // Display the video
-                            echo "<form action='videopage.php' method='post'>";
+                            echo "<form action='videopage.php' method='get'>";
                             echo "<div class='videoplaybuttons'>";
                             echo "<div class='col-sm-3'>";
                             echo "<button class='button button1'>";

@@ -15,7 +15,7 @@
                             '<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <form class="navbar-form navbar-left" action="searchresults.php" method="post">
+                                    <form class="navbar-form navbar-left" action="searchresults.php" method="get">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search branch..." name="search">
                                             <div class="input-group-btn">

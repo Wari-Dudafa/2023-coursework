@@ -37,9 +37,9 @@
         include_once("connection.php");
 
         // Defines the variables to be posted into the databsae
-        $userid = $_POST["userid"];
-        $comment = $_POST["comment"];
-        $videoid = $_POST["videoid"];
+        $userid = $_GET["userid"];
+        $comment = $_GET["comment"];
+        $videoid = $_GET["videoid"];
 
         if (!isset($comment)) {
             // Checks if the comment is empty or not for the sake of robustness
@@ -54,7 +54,7 @@
         // Adds all the variables to the database
 
         //Defines a form with the video id so when it gets sent back to the videoplayer- it will play
-        echo "<form id='commentposter' action='videopage.php' method='post'>";
+        echo "<form id='commentposter' action='videopage.php' method='get'>";
         echo "<input type='text' name='VideoID' value='".$videoid."'>";
         echo '</form>';
 

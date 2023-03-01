@@ -1,5 +1,6 @@
 <?php // Video upload handler
-    include_once("connection.php");             
+    session_start();   
+    include_once("connection.php");          
 
     if(isset($_POST['but_upload'])) {
         $maxsize = 13000000; // Approx 10MB
@@ -55,12 +56,12 @@
 
                                 //<Uploaded by segment
                                     //<Gets user id
-                                        $stmt1 = $conn->prepare("SELECT * FROM TblUsers WHERE Username =:Username ;");
+                                        $stmt1 = $conn->prepare("SELECT * FROM TblUsers WHERE Username = :Username ;");
                                         $stmt1->bindParam(':Username', $_SESSION['CurrentUser']);
                                         $stmt1->execute();
 
                                         while ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-                                            $userid=$row["UserID"];
+                                            $userid = $row["UserID"] ?? 1;
                                         }
                                     //>
                                     
@@ -70,12 +71,11 @@
 
                                         while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {
                                             $videoid=$row["MAX(VideoID)"];
-                                            //echo " VideoID: '".$videoid."'";
                                         }
                                         
                                     //>
 
-                                    //<Puts user id's into TblUsersvideos
+                                    //<Puts user id's into Tblvideos
                                         $stmt_ = $conn->prepare("UPDATE TblVideos SET UserID = :userid WHERE VideoID = :videoid");
                                         $stmt_->bindParam(':userid', $userid);
                                         $stmt_->bindParam(':videoid', $videoid);
@@ -83,7 +83,6 @@
                                         $conn=null;
                                     //>
                                 //>
-                                //echo "<br>UploadStatus: complete";
                                 // Head to a new page after your upload has completed
                                 header('Location: homepage.php');                                                
                             }
