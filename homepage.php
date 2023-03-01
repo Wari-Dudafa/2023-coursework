@@ -36,8 +36,8 @@
         <div class="container-fluid">
 
             <div class="tab">
-                <button class="tablinks" onclick="openCity(event, 'recommended')" id="defaultOpen" >Recommended videos</button>
-                <button class="tablinks" onclick="openCity(event, 'new')">New videos</button>
+                <button class="tablinks" onclick="openCity(event, 'new')" id="defaultOpen" >New videos</button>
+                <button class="tablinks" onclick="openCity(event, 'recommended')" >Recommended videos</button>
                 <button class="tablinks" onclick="openCity(event, 'liked')">Liked videos</button>
             </div>
                                 
